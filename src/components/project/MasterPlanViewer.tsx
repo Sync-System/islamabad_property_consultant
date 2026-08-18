@@ -45,14 +45,13 @@ export function MasterPlanViewer({ project }: { project: Project }) {
           title="Read the site before you choose a block"
           intro="Pan and zoom the plan, or open it fullscreen. Then tell us which part of the scheme interests you and we will confirm what is actually available there."
           id="master-plan-title"
-          tone="dark"
           split
         />
 
         {masterPlan.note && (
           <Reveal delay={80}>
-            <p className="mt-8 flex max-w-[70ch] items-start gap-3 border border-brass-400/25 bg-brass-400/8 p-5 text-body-sm text-paper-100/80">
-              <AlertIcon size={19} className="mt-0.5 shrink-0 text-brass-300" />
+            <p className="mt-8 flex max-w-[70ch] items-start gap-3 border border-accent/25 bg-accent/8 p-5 text-body-sm text-content-muted">
+              <AlertIcon size={19} className="mt-0.5 shrink-0 text-accent" />
               <span>{masterPlan.note}</span>
             </p>
           </Reveal>
@@ -74,14 +73,14 @@ export function MasterPlanViewer({ project }: { project: Project }) {
           </Reveal>
 
           <Reveal delay={140} className="lg:col-span-4">
-            <div className="flex h-full flex-col justify-between gap-8 border border-paper-50/12 p-7">
+            <div className="flex h-full flex-col justify-between gap-8 border border-line p-7">
               <div>
-                <h3 className="eyebrow text-brass-300">Legend</h3>
+                <h3 className="eyebrow text-accent">Legend</h3>
                 <ul className="mt-5 space-y-3.5">
                   {masterPlan.legend?.map((entry) => (
                     <li
                       key={entry.label}
-                      className="flex items-center gap-3 text-body-sm text-paper-100/75"
+                      className="flex items-center gap-3 text-body-sm text-content-muted"
                     >
                       <span
                         aria-hidden="true"
@@ -95,7 +94,7 @@ export function MasterPlanViewer({ project }: { project: Project }) {
               </div>
 
               <div>
-                <p className="text-body-sm text-paper-100/65">
+                <p className="text-body-sm text-content-muted">
                   Block availability changes with each ballot. Ask us before you
                   commit to a location.
                 </p>
@@ -234,7 +233,7 @@ function PlanCanvas({
         onPointerUp={endDrag}
         onPointerCancel={endDrag}
         onKeyDown={onKeyDown}
-        className={`relative overflow-hidden border border-paper-50/12 bg-ink-900 ${
+        className={`relative overflow-hidden border border-line bg-surface-feature ${
           tall ? "h-[70vh]" : "aspect-[3/2]"
         } ${scale > 1 ? "cursor-grab active:cursor-grabbing" : "cursor-default"} touch-pan-y`}
       >
@@ -262,7 +261,7 @@ function PlanCanvas({
           >
             <MinusIcon size={18} />
           </PlanButton>
-          <span className="tabular min-w-11 bg-ink-950/75 px-2 py-2 text-center text-[0.75rem] font-medium text-paper-100 backdrop-blur-sm">
+          <span className="tabular min-w-11 bg-ink-950/75 px-2 py-2 text-center text-[0.75rem] font-medium text-paper-100/80 backdrop-blur-sm">
             {scale.toFixed(1)}×
           </span>
           <PlanButton
@@ -280,7 +279,7 @@ function PlanCanvas({
         </div>
       </div>
 
-      <p className="mt-3 text-micro text-paper-100/50">
+      <p className="mt-3 text-micro text-content-subtle">
         Drag to pan once zoomed. Keyboard: <kbd>+</kbd> / <kbd>−</kbd> to zoom,
         arrow keys to pan, <kbd>0</kbd> to reset.
       </p>
@@ -305,7 +304,7 @@ function PlanButton({
       onClick={onClick}
       disabled={disabled}
       aria-label={label}
-      className="grid size-10 place-items-center bg-ink-950/75 text-paper-100 backdrop-blur-sm transition-colors hover:bg-ink-950 disabled:opacity-35"
+      className="grid size-10 place-items-center bg-ink-950/75 text-paper-100/80 backdrop-blur-sm transition-colors hover:bg-ink-950 hover:text-paper-50 disabled:opacity-35"
     >
       {children}
     </button>
@@ -354,7 +353,7 @@ function FullscreenPlan({
           ref={closeRef}
           type="button"
           onClick={onClose}
-          className="grid size-11 place-items-center border border-paper-50/25 text-paper-50 transition-colors hover:bg-paper-50 hover:text-ink-900"
+          className="grid size-11 place-items-center border border-paper-50/25 text-paper-50 transition-colors hover:bg-paper-50 hover:text-ink-950"
         >
           <CloseIcon size={20} />
           <span className="sr-only">Close fullscreen master plan</span>

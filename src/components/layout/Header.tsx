@@ -7,15 +7,18 @@ import { agencyConfig } from "@/lib/config/agency";
 import { telUrl } from "@/lib/whatsapp";
 import { WhatsAppLink, PhoneLink } from "@/components/conversion/WhatsAppLink";
 import { CloseIcon, MenuIcon, PhoneIcon, WhatsAppIcon } from "@/components/ui/Icon";
+import { ThemeToggle } from "./ThemeToggle";
 import { Wordmark } from "./Wordmark";
 
 /**
  * Sticky navigation with scroll-spy and a mobile drawer.
  *
  * Two behaviours worth noting:
- *  - The header is transparent over a dark hero and gains a solid background
- *    once the hero is behind it. That is one class swap driven by a single
- *    scroll listener, not a per-frame recomputation.
+ *  - The header is transparent over the hero and gains a solid background once
+ *    the hero is behind it. That is one class swap driven by a single scroll
+ *    listener, not a per-frame recomputation. Text colour is no longer part of
+ *    that swap: the hero scrim follows the theme, so the semantic tokens read
+ *    correctly over both states.
  *  - The drawer is a real focus trap with `Escape` handling and background
  *    scroll lock, because a nav a keyboard user cannot leave is not navigation.
  */
@@ -124,7 +127,7 @@ export function Header({ nav, projectName, projectSlug, overHero = false }: Head
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-500 ease-[var(--ease-out-quint)] ${
           solid
-            ? "border-b border-ink-900/10 bg-paper-50/92 backdrop-blur-md"
+            ? "border-b border-line bg-surface/92 backdrop-blur-md"
             : "border-b border-transparent bg-transparent"
         }`}
       >
@@ -134,7 +137,7 @@ export function Header({ nav, projectName, projectSlug, overHero = false }: Head
             className="shrink-0"
             aria-label={`${agencyConfig.name} — home`}
           >
-            <Wordmark tone={solid ? "dark" : "light"} />
+            <Wordmark />
           </Link>
 
           <nav
@@ -148,21 +151,15 @@ export function Header({ nav, projectName, projectSlug, overHero = false }: Head
                   key={item.href}
                   href={item.href}
                   aria-current={isActive ? "true" : undefined}
-                  className={`relative px-3 py-2 text-[0.8125rem] font-medium transition-colors duration-300 ${
-                    solid
-                      ? isActive
-                        ? "text-ink-900"
-                        : "text-ink-600 hover:text-ink-900"
-                      : isActive
-                        ? "text-paper-50"
-                        : "text-paper-100/70 hover:text-paper-50"
+                  className={`relative whitespace-nowrap px-2.5 py-2 text-[0.8125rem] font-medium transition-colors duration-300 ${
+                    isActive ? "text-content" : "text-content-muted hover:text-content"
                   }`}
                 >
                   {item.label}
                   <span
                     aria-hidden="true"
-                    className={`absolute inset-x-3 -bottom-0.5 h-px origin-left transition-transform duration-400 ease-[var(--ease-out-quint)] ${
-                      solid ? "bg-brass-600" : "bg-brass-400"
+                    className={`absolute inset-x-2.5 -bottom-0.5 h-px origin-left transition-transform duration-400 ease-[var(--ease-out-quint)] ${
+                      "bg-accent"
                     } ${isActive ? "scale-x-100" : "scale-x-0"}`}
                   />
                 </a>
@@ -171,16 +168,14 @@ export function Header({ nav, projectName, projectSlug, overHero = false }: Head
           </nav>
 
           <div className="ml-auto flex items-center gap-2 lg:ml-4">
+            <ThemeToggle />
+
             <PhoneLink
               href={telUrl}
               ctaLocation="header"
               bare
               ariaLabel={`Call ${agencyConfig.name} on ${agencyConfig.phoneDisplay}`}
-              className={`hidden h-11 w-11 items-center justify-center rounded-xs border transition-colors duration-300 sm:inline-flex ${
-                solid
-                  ? "border-ink-900/20 text-ink-800 hover:border-ink-900/50"
-                  : "border-paper-50/25 text-paper-50 hover:border-paper-50/70"
-              }`}
+              className="hidden h-11 w-11 items-center justify-center rounded-xs border border-line text-content transition-colors duration-300 hover:border-line-strong sm:inline-flex"
             >
               <PhoneIcon size={18} />
             </PhoneLink>
@@ -220,11 +215,7 @@ export function Header({ nav, projectName, projectSlug, overHero = false }: Head
               onClick={() => setOpen((v) => !v)}
               aria-expanded={open}
               aria-controls="nav-drawer"
-              className={`inline-flex h-11 w-11 items-center justify-center rounded-xs border transition-colors duration-300 lg:hidden ${
-                solid
-                  ? "border-ink-900/20 text-ink-900"
-                  : "border-paper-50/25 text-paper-50"
-              }`}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-xs border border-line text-content transition-colors duration-300 lg:hidden"
             >
               {open ? <CloseIcon size={20} /> : <MenuIcon size={20} />}
               <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
@@ -253,7 +244,7 @@ export function Header({ nav, projectName, projectSlug, overHero = false }: Head
           role="dialog"
           aria-modal={open || undefined}
           aria-label="Menu"
-          className={`absolute inset-x-0 top-0 origin-top bg-paper-50 pt-[var(--header-h)] shadow-float transition-transform duration-500 ease-[var(--ease-out-quint)] ${
+          className={`absolute inset-x-0 top-0 origin-top bg-surface pt-[var(--header-h)] shadow-float transition-transform duration-500 ease-[var(--ease-out-quint)] ${
             open ? "translate-y-0" : "-translate-y-full"
           }`}
         >
@@ -267,9 +258,9 @@ export function Header({ nav, projectName, projectSlug, overHero = false }: Head
                   <a
                     href={item.href}
                     onClick={close}
-                    className="flex items-baseline gap-4 py-4 text-h4 text-ink-900"
+                    className="flex items-baseline gap-4 py-4 text-h4 text-content"
                   >
-                    <span className="eyebrow tabular w-6 text-brass-700">
+                    <span className="eyebrow tabular w-6 text-accent">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     {item.label}
@@ -293,7 +284,7 @@ export function Header({ nav, projectName, projectSlug, overHero = false }: Head
               </PhoneLink>
             </div>
 
-            <p className="mt-6 text-micro text-ink-500">
+            <p className="mt-6 text-micro text-content-subtle">
               {agencyConfig.positioning}
             </p>
           </nav>

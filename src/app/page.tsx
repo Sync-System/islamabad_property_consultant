@@ -61,11 +61,11 @@ export default function HomePage() {
       <main id="main">
         {/* --- Hero ---------------------------------------------------- */}
         <section
-          className="relative isolate flex min-h-[88svh] flex-col justify-end overflow-hidden bg-ink-950 text-paper-50"
+          className="relative isolate flex min-h-[88svh] flex-col justify-end overflow-hidden bg-surface-feature text-content"
           aria-labelledby="home-title"
         >
           <div aria-hidden="true" className="absolute inset-0 -z-10">
-            <ProjectArt variant="ridge" seed="home" tone="dark" className="h-full w-full" />
+            <ProjectArt variant="ridge" seed="home" className="h-full w-full" />
             <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/65 to-ink-950/75" />
             <div className="grain absolute inset-0" />
           </div>
@@ -75,8 +75,8 @@ export default function HomePage() {
               className="hero-enter flex items-center gap-3.5"
               style={{ "--enter-delay": "40ms" } as React.CSSProperties}
             >
-              <span className="h-px w-10 bg-brass-400/70" aria-hidden="true" />
-              <span className="eyebrow text-brass-300">
+              <span className="h-px w-10 bg-accent/60" aria-hidden="true" />
+              <span className="eyebrow text-accent">
                 Property consultancy · Islamabad
               </span>
             </p>
@@ -84,7 +84,7 @@ export default function HomePage() {
             <div className="mt-7 max-w-5xl overflow-hidden">
               <h1
                 id="home-title"
-                className="hero-enter-mask optical-left text-h1 text-paper-50"
+                className="hero-enter-mask optical-left text-h1 text-content"
                 style={{ "--enter-delay": "90ms" } as React.CSSProperties}
               >
                 Independent guidance for property buyers and investors in
@@ -93,7 +93,7 @@ export default function HomePage() {
             </div>
 
             <p
-              className="hero-enter mt-8 max-w-[52ch] text-lead text-paper-100/80"
+              className="hero-enter mt-8 max-w-[52ch] text-lead text-content-muted"
               style={{ "--enter-delay": "170ms" } as React.CSSProperties}
             >
               We advise on premium schemes across the capital — with the
@@ -108,7 +108,7 @@ export default function HomePage() {
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
                   href={`/projects/${featured.slug}`}
-                  className={buttonClass("outlineInverse", "lg", "w-full sm:w-auto")}
+                  className={buttonClass("outline", "lg", "w-full sm:w-auto")}
                 >
                   Explore {featured.shortName}
                   <ArrowIcon size={18} />
@@ -144,14 +144,14 @@ export default function HomePage() {
               <Reveal
                 as="li"
                 delay={120}
-                className="flex flex-col justify-between border border-dashed border-ink-900/25 bg-paper-100 p-8"
+                className="flex flex-col justify-between border border-dashed border-line bg-surface-alt p-8"
               >
                 <div>
-                  <p className="eyebrow text-brass-700">Next</p>
-                  <h3 className="mt-5 font-display text-h3 text-ink-900">
+                  <p className="eyebrow text-accent">Next</p>
+                  <h3 className="mt-5 font-display text-h3 text-content">
                     More projects, as we take them on
                   </h3>
-                  <p className="mt-4 text-body-sm text-ink-600">
+                  <p className="mt-4 text-body-sm text-content-muted">
                     We add a project only once we can source its published detail.
                     Tell us what you are looking for and we will advise whether we
                     cover it.
@@ -172,24 +172,23 @@ export default function HomePage() {
               eyebrow="How we work"
               title="Four steps, in this order"
               id="how-title"
-              tone="dark"
               intro="It is a deliberately unglamorous process. It is also the one that stops people paying for something they have not understood."
               split
             />
 
-            <ol className="mt-16 grid gap-px overflow-hidden border border-paper-50/12 bg-paper-50/12 sm:grid-cols-2 lg:grid-cols-4">
+            <ol className="mt-16 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
               {HOW_WE_WORK.map((item, index) => (
                 <Reveal
                   as="li"
                   key={item.step}
                   delay={index * 90}
-                  className="bg-pine-950 p-8 lg:p-9"
+                  className="bg-surface-feature p-8 lg:p-9"
                 >
-                  <span className="eyebrow tabular text-brass-400/80">
+                  <span className="eyebrow tabular text-accent">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="mt-5 text-h4 text-paper-50">{item.step}</h3>
-                  <p className="mt-4 text-body-sm text-paper-100/70">{item.body}</p>
+                  <h3 className="mt-5 text-h4 text-content">{item.step}</h3>
+                  <p className="mt-4 text-body-sm text-content-muted">{item.body}</p>
                 </Reveal>
               ))}
             </ol>
@@ -205,7 +204,6 @@ export default function HomePage() {
                   <ProjectArt
                     variant="aerial"
                     seed="home-featured"
-                    tone="dark"
                     className="h-full w-full"
                   />
                 </div>
@@ -213,34 +211,34 @@ export default function HomePage() {
 
               <div className="lg:col-span-6">
                 <Reveal>
-                  <p className="eyebrow text-brass-700">Featured project</p>
-                  <h2 className="optical-left mt-5 text-h2 text-ink-900">
+                  <p className="eyebrow text-accent">Featured project</p>
+                  <h2 className="optical-left mt-5 text-h2 text-content">
                     {featured.name}
                   </h2>
-                  <p className="mt-6 max-w-[48ch] text-body-lg text-ink-600">
+                  <p className="mt-6 max-w-[48ch] text-body-lg text-content-muted">
                     {featured.summary}
                   </p>
                 </Reveal>
 
                 <Reveal delay={120}>
-                  <dl className="mt-9 grid grid-cols-2 gap-6 border-t border-ink-900/12 pt-7">
+                  <dl className="mt-9 grid grid-cols-2 gap-6 border-t border-line pt-7">
                     <div>
-                      <dt className="eyebrow text-ink-500">Location</dt>
-                      <dd className="mt-2 text-body-sm font-medium text-ink-900">
+                      <dt className="eyebrow text-content-subtle">Location</dt>
+                      <dd className="mt-2 text-body-sm font-medium text-content">
                         {featured.locationLabel}
                       </dd>
                     </div>
                     <div>
-                      <dt className="eyebrow text-ink-500">Status</dt>
-                      <dd className="mt-2 text-body-sm font-medium text-ink-900">
+                      <dt className="eyebrow text-content-subtle">Status</dt>
+                      <dd className="mt-2 text-body-sm font-medium text-content">
                         {isVerified(featured.status)
                           ? featured.status.value
                           : "To confirm"}
                       </dd>
                     </div>
                     <div className="col-span-2">
-                      <dt className="eyebrow text-ink-500">Developed by</dt>
-                      <dd className="mt-2 text-body-sm font-medium text-ink-900">
+                      <dt className="eyebrow text-content-subtle">Developed by</dt>
+                      <dd className="mt-2 text-body-sm font-medium text-content">
                         {featured.developers.map((d) => d.name).join(" · ")}
                       </dd>
                     </div>

@@ -36,19 +36,19 @@ export function DevelopmentProgress({ project }: { project: Project }) {
               className="grid gap-7 lg:grid-cols-12 lg:gap-12"
             >
               <div className="lg:col-span-4">
-                <div className="flex items-baseline gap-4 border-t border-ink-900/15 pt-5">
-                  <span className="eyebrow tabular text-brass-700">
+                <div className="flex items-baseline gap-4 border-t border-line pt-5">
+                  <span className="eyebrow tabular text-accent">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <div>
                     {entry.isoDate ? (
-                      <time dateTime={entry.isoDate} className="eyebrow text-ink-500">
+                      <time dateTime={entry.isoDate} className="eyebrow text-content-subtle">
                         {entry.date}
                       </time>
                     ) : (
-                      <p className="eyebrow text-ink-500">{entry.date}</p>
+                      <p className="eyebrow text-content-subtle">{entry.date}</p>
                     )}
-                    <h3 className="mt-3 font-display text-h4 text-ink-900">
+                    <h3 className="mt-3 font-display text-h4 text-content">
                       {entry.phase}
                     </h3>
                   </div>
@@ -56,9 +56,9 @@ export function DevelopmentProgress({ project }: { project: Project }) {
               </div>
 
               <div className="lg:col-span-4">
-                <p className="text-body-sm text-ink-600">{entry.note}</p>
+                <p className="text-body-sm text-content-muted">{entry.note}</p>
                 {entry.source && (
-                  <p className="mt-4 text-micro text-ink-500">
+                  <p className="mt-4 text-micro text-content-subtle">
                     Source: {entry.source.label}
                     {entry.source.checkedOn ? ` · checked ${entry.source.checkedOn}` : ""}
                   </p>

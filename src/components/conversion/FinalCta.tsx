@@ -41,12 +41,18 @@ export function FinalCta({
         {media?.src ? (
           <ProjectMedia media={media} seed="final" sizes="100vw" className="h-full w-full" />
         ) : (
-          <ProjectArt variant="ridge" seed="final" tone="dark" className="h-full w-full" />
+          <ProjectArt variant="ridge" seed="final" className="h-full w-full" />
         )}
       </div>
+      {/* Themed scrim, so the closing band is white-on-white in the light
+          theme rather than a lone dark slab at the foot of the page. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-pine-950/90 via-pine-950/75 to-pine-950"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(to bottom, var(--scrim-1), var(--scrim-0) 55%, var(--scrim-0))",
+        }}
       />
       <div aria-hidden="true" className="grain pointer-events-none absolute inset-0" />
 
@@ -54,14 +60,14 @@ export function FinalCta({
         <div className="mx-auto max-w-3xl text-center">
           <Reveal>
             <p className="flex items-center justify-center gap-3.5">
-              <span className="h-px w-8 bg-brass-400/60" aria-hidden="true" />
-              <span className="eyebrow text-brass-300">Next step</span>
-              <span className="h-px w-8 bg-brass-400/60" aria-hidden="true" />
+              <span className="h-px w-8 bg-accent/60" aria-hidden="true" />
+              <span className="eyebrow text-accent">Next step</span>
+              <span className="h-px w-8 bg-accent/60" aria-hidden="true" />
             </p>
-            <h2 id="final-cta-title" className="mt-6 text-h1 text-paper-50">
+            <h2 id="final-cta-title" className="mt-6 text-h1 text-content">
               Considering {subject}?
             </h2>
-            <p className="mx-auto mt-6 max-w-[46ch] text-body-lg text-paper-100/75">
+            <p className="mx-auto mt-6 max-w-[46ch] text-body-lg text-content-muted">
               Speak directly with {agencyConfig.name} for current project
               information, availability and site-visit guidance.
             </p>
@@ -81,7 +87,7 @@ export function FinalCta({
 
               <a
                 href="#site-visit"
-                className={buttonClass("outlineInverse", "lg", "w-full sm:w-auto")}
+                className={buttonClass("outline", "lg", "w-full sm:w-auto")}
               >
                 <CalendarIcon size={18} />
                 Request a site visit
@@ -91,7 +97,7 @@ export function FinalCta({
                 href={telUrl}
                 ctaLocation="final-cta"
                 bare
-                className="inline-flex min-h-14 items-center justify-center gap-2 px-2 text-[0.9375rem] font-medium text-paper-100/75 underline-offset-[6px] transition-colors hover:text-paper-50 hover:underline"
+                className="inline-flex min-h-14 items-center justify-center gap-2 px-2 text-[0.9375rem] font-medium text-content-muted underline-offset-[6px] transition-colors hover:text-content hover:underline"
               >
                 <PhoneIcon size={18} />
                 Call {agencyConfig.phoneDisplay}
@@ -100,11 +106,11 @@ export function FinalCta({
           </Reveal>
 
           <Reveal delay={220}>
-            <p className="mx-auto mt-10 max-w-[58ch] text-micro leading-relaxed text-paper-100/45">
+            <p className="mx-auto mt-10 max-w-[58ch] text-micro leading-relaxed text-content-subtle">
               {agencyConfig.independenceNotice}
             </p>
             {media?.credit && (
-              <MediaCredit media={media} tone="dark" className="mt-2" />
+              <MediaCredit media={media} className="mt-2" />
             )}
           </Reveal>
         </div>

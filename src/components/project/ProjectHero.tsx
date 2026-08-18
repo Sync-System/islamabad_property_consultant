@@ -25,7 +25,7 @@ export function ProjectHero({ project }: { project: Project }) {
 
   return (
     <section
-      className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink-950 text-paper-50"
+      className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-surface-feature text-content"
       aria-labelledby="hero-title"
     >
       {/* --- Backdrop ------------------------------------------------------ */}
@@ -44,20 +44,36 @@ export function ProjectHero({ project }: { project: Project }) {
         </HeroBackdrop>
 
         {/* Three scrims, each with one job: ground the copy at the bottom, seat
-            the header at the top, and darken the left column where the display
-            type sits — so the ridge stays visible instead of being flattened
-            by one blanket overlay. */}
+            the header at the top, and veil the left column where the display
+            type sits — so the photograph stays visible instead of being
+            flattened by one blanket overlay.
+
+            They are built from `--scrim-*`, which follows the theme: the light
+            theme veils the photograph in white so the hero reads as part of an
+            all-white page, while the dark theme deepens it. Either way the
+            copy keeps its contrast against whatever is behind it. */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/60 to-ink-950/30"
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(to top, var(--scrim-0), var(--scrim-1) 45%, var(--scrim-2))",
+          }}
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-r from-ink-950/85 via-ink-950/35 to-transparent"
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, var(--scrim-1), var(--scrim-2) 45%, transparent)",
+          }}
         />
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-ink-950/85 to-transparent"
+          className="absolute inset-x-0 top-0 h-44"
+          style={{
+            backgroundImage: "linear-gradient(to bottom, var(--scrim-1), transparent)",
+          }}
         />
         <div aria-hidden="true" className="grain absolute inset-0" />
       </div>
@@ -70,14 +86,14 @@ export function ProjectHero({ project }: { project: Project }) {
               className="hero-enter flex items-center gap-3.5"
               style={{ "--enter-delay": "40ms" } as React.CSSProperties}
             >
-              <span className="h-px w-10 bg-brass-400/70" aria-hidden="true" />
-              <span className="eyebrow text-brass-300">{hero.eyebrow}</span>
+              <span className="h-px w-10 bg-accent/60" aria-hidden="true" />
+              <span className="eyebrow text-accent">{hero.eyebrow}</span>
             </p>
 
             <div className="mt-6 overflow-hidden">
               <h1
                 id="hero-title"
-                className="hero-enter-mask optical-left font-display text-display leading-[0.86] text-paper-50"
+                className="hero-enter-mask optical-left font-display text-display leading-[0.86] text-content"
                 style={{ "--enter-delay": "90ms" } as React.CSSProperties}
               >
                 {hero.title}
@@ -85,7 +101,7 @@ export function ProjectHero({ project }: { project: Project }) {
             </div>
 
             <p
-              className="hero-enter mt-7 max-w-[46ch] text-lead text-paper-100/85"
+              className="hero-enter mt-7 max-w-[46ch] text-lead text-content-muted"
               style={{ "--enter-delay": "170ms" } as React.CSSProperties}
             >
               {hero.subtitle}
@@ -95,14 +111,14 @@ export function ProjectHero({ project }: { project: Project }) {
               className="hero-enter mt-8"
               style={{ "--enter-delay": "250ms" } as React.CSSProperties}
             >
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-3 text-[0.8125rem] text-paper-100/75">
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-3 text-[0.8125rem] text-content-muted">
                 <span className="flex items-center gap-2">
-                  <span className="size-1.5 rounded-pill bg-brass-400" aria-hidden="true" />
+                  <span className="size-1.5 rounded-pill bg-accent" aria-hidden="true" />
                   {hero.locationLabel}
                 </span>
                 {association && (
                   <>
-                    <span className="hidden h-3.5 w-px bg-paper-50/25 sm:block" aria-hidden="true" />
+                    <span className="hidden h-3.5 w-px bg-line-strong sm:block" aria-hidden="true" />
                     <span>{association}</span>
                   </>
                 )}
@@ -126,14 +142,14 @@ export function ProjectHero({ project }: { project: Project }) {
 
                 <a
                   href="#overview"
-                  className={buttonClass("outlineInverse", "lg", "w-full sm:w-auto")}
+                  className={buttonClass("outline", "lg", "w-full sm:w-auto")}
                 >
                   {hero.secondaryCta}
                 </a>
 
                 <a
                   href="#site-visit"
-                  className="inline-flex min-h-12 items-center justify-center gap-2 px-1 text-[0.875rem] font-medium text-paper-100/75 underline-offset-[6px] transition-colors hover:text-paper-50 hover:underline sm:ml-1"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 px-1 text-[0.875rem] font-medium text-content-muted underline-offset-[6px] transition-colors hover:text-content hover:underline sm:ml-1"
                 >
                   <CalendarIcon size={17} />
                   Request a site visit
@@ -147,12 +163,12 @@ export function ProjectHero({ project }: { project: Project }) {
             className="hero-enter lg:col-span-4 lg:pb-2"
             style={{ "--enter-delay": "410ms" } as React.CSSProperties}
           >
-            <div className="border-l border-paper-50/18 pl-5 lg:pl-7">
-              <p className="eyebrow text-paper-100/50">Presented by</p>
-              <p className="mt-3 font-display text-h4 text-paper-50">
+            <div className="border-l border-line pl-5 lg:pl-7">
+              <p className="eyebrow text-content-subtle">Presented by</p>
+              <p className="mt-3 font-display text-h4 text-content">
                 {agencyConfig.name}
               </p>
-              <p className="mt-3 text-body-sm text-paper-100/65">
+              <p className="mt-3 text-body-sm text-content-muted">
                 {agencyConfig.positioning} We are an independent consultancy —
                 not CDA, DHA, or the developer.
               </p>
@@ -161,17 +177,17 @@ export function ProjectHero({ project }: { project: Project }) {
         </div>
 
         {/* --- Scroll cue -------------------------------------------------- */}
-        <div className="mt-12 flex items-center justify-between border-t border-paper-50/12 pt-6 lg:mt-16">
+        <div className="mt-12 flex items-center justify-between border-t border-line pt-6 lg:mt-16">
           <a
             href="#overview"
-            className="group flex min-h-11 items-center gap-3 pr-2 text-[0.75rem] tracking-[0.16em] text-paper-100/55 uppercase transition-colors hover:text-paper-50"
+            className="group flex min-h-11 items-center gap-3 pr-2 text-[0.75rem] tracking-[0.16em] text-content-subtle uppercase transition-colors hover:text-content"
           >
             <span
               aria-hidden="true"
-              className="relative block h-8 w-px overflow-hidden bg-paper-50/20"
+              className="relative block h-8 w-px overflow-hidden bg-line-strong"
             >
               <span
-                className="absolute inset-0 bg-brass-400"
+                className="absolute inset-0 bg-accent"
                 style={{ animation: "scroll-hint 2.6s var(--ease-in-out-quart) infinite" }}
               />
             </span>
@@ -183,13 +199,13 @@ export function ProjectHero({ project }: { project: Project }) {
           </a>
 
           <div className="hidden max-w-[42ch] text-right sm:block">
-            <p className="text-micro text-paper-100/45">
+            <p className="text-micro text-content-subtle">
               Project information is compiled from the developer&rsquo;s
               published material. Verify current details before any financial
               decision.
             </p>
             {/* Contextual photograph of the Margallas, not the project site. */}
-            <MediaCredit media={hero.media} tone="dark" className="mt-1.5" />
+            <MediaCredit media={hero.media} className="mt-1.5" />
           </div>
         </div>
       </div>

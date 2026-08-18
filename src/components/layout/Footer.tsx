@@ -28,13 +28,13 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-ink-950 pb-24 pt-section-sm text-paper-100 md:pb-16">
+    <footer className="bg-surface-feature pb-24 pt-section-sm text-content-muted md:pb-16">
       <Container>
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
           {/* --- Identity ------------------------------------------------ */}
           <div className="lg:col-span-5">
-            <Wordmark tone="light" />
-            <p className="mt-6 max-w-[40ch] text-body-sm text-paper-100/65">
+            <Wordmark />
+            <p className="mt-6 max-w-[40ch] text-body-sm text-content-muted">
               {agencyConfig.positioning}
             </p>
             <WhatsAppLink ctaLocation="footer" size="md" className="mt-7">
@@ -50,7 +50,7 @@ export function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${agencyConfig.name} on ${social.label}`}
-                      className="grid size-10 place-items-center border border-paper-50/20 text-paper-100/75 transition-colors hover:border-paper-50/60 hover:text-paper-50"
+                      className="grid size-10 place-items-center border border-line text-content-muted transition-colors hover:border-line-strong hover:text-content"
                     >
                       <SocialGlyph network={social.network} />
                     </a>
@@ -58,7 +58,7 @@ export function Footer() {
                 ))}
               </ul>
             ) : (
-              <p className="mt-8 text-micro text-paper-100/40">
+              <p className="mt-8 text-micro text-content-subtle">
                 Social profiles to be confirmed.
               </p>
             )}
@@ -66,13 +66,13 @@ export function Footer() {
 
           {/* --- Navigation ---------------------------------------------- */}
           <nav aria-label="Footer" className="lg:col-span-3">
-            <h2 className="eyebrow text-brass-300">Projects</h2>
+            <h2 className="eyebrow text-accent">Projects</h2>
             <ul className="mt-5 space-y-3">
               {allProjects.map((project) => (
                 <li key={project.slug}>
                   <Link
                     href={`/projects/${project.slug}`}
-                    className="text-body-sm text-paper-100/70 transition-colors hover:text-paper-50"
+                    className="text-body-sm text-content-muted transition-colors hover:text-content"
                   >
                     {project.name}
                   </Link>
@@ -81,19 +81,19 @@ export function Footer() {
               <li>
                 <Link
                   href="/projects"
-                  className="text-body-sm text-paper-100/70 transition-colors hover:text-paper-50"
+                  className="text-body-sm text-content-muted transition-colors hover:text-content"
                 >
                   All projects
                 </Link>
               </li>
             </ul>
 
-            <h2 className="eyebrow mt-9 text-brass-300">Company</h2>
+            <h2 className="eyebrow mt-9 text-accent">Company</h2>
             <ul className="mt-5 space-y-3">
               <li>
                 <Link
                   href="/#about"
-                  className="text-body-sm text-paper-100/70 transition-colors hover:text-paper-50"
+                  className="text-body-sm text-content-muted transition-colors hover:text-content"
                 >
                   About the consultancy
                 </Link>
@@ -101,7 +101,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/#contact"
-                  className="text-body-sm text-paper-100/70 transition-colors hover:text-paper-50"
+                  className="text-body-sm text-content-muted transition-colors hover:text-content"
                 >
                   Contact
                 </Link>
@@ -110,7 +110,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-body-sm text-paper-100/70 transition-colors hover:text-paper-50"
+                    className="text-body-sm text-content-muted transition-colors hover:text-content"
                   >
                     {link.label}
                   </Link>
@@ -121,39 +121,39 @@ export function Footer() {
 
           {/* --- Contact -------------------------------------------------- */}
           <div className="lg:col-span-4">
-            <h2 className="eyebrow text-brass-300">Contact</h2>
+            <h2 className="eyebrow text-accent">Contact</h2>
             <dl className="mt-5 space-y-4 text-body-sm">
               <div>
-                <dt className="text-paper-100/45">WhatsApp</dt>
+                <dt className="text-content-subtle">WhatsApp</dt>
                 <dd className="mt-1">
                   <WhatsAppLink
                     ctaLocation="footer"
                     bare
                     hideIcon
-                    className="text-paper-50 underline decoration-paper-50/30 underline-offset-4 hover:decoration-brass-400"
+                    className="text-content underline decoration-line-strong underline-offset-4 hover:decoration-accent"
                   >
                     {agencyConfig.whatsappDisplay}
                   </WhatsAppLink>
                 </dd>
               </div>
               <div>
-                <dt className="text-paper-100/45">Phone</dt>
+                <dt className="text-content-subtle">Phone</dt>
                 <dd className="mt-1">
                   <PhoneLink
                     href={telUrl}
                     ctaLocation="footer"
                     bare
-                    className="text-paper-50 underline decoration-paper-50/30 underline-offset-4 hover:decoration-brass-400"
+                    className="text-content underline decoration-line-strong underline-offset-4 hover:decoration-accent"
                   >
                     {agencyConfig.phoneDisplay}
                   </PhoneLink>
                 </dd>
               </div>
               <div>
-                <dt className="text-paper-100/45">Email</dt>
-                <dd className="mt-1 text-paper-100/70">
+                <dt className="text-content-subtle">Email</dt>
+                <dd className="mt-1 text-content-muted">
                   {email ? (
-                    <a href={`mailto:${email}`} className="text-paper-50 underline decoration-paper-50/30 underline-offset-4">
+                    <a href={`mailto:${email}`} className="text-content underline decoration-paper-50/30 underline-offset-4">
                       {email}
                     </a>
                   ) : (
@@ -162,15 +162,15 @@ export function Footer() {
                 </dd>
               </div>
               <div>
-                <dt className="text-paper-100/45">Office</dt>
-                <dd className="mt-1 text-paper-100/70">
+                <dt className="text-content-subtle">Office</dt>
+                <dd className="mt-1 text-content-muted">
                   {office ? (
                     mapUrl ? (
                       <a
                         href={mapUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-paper-50 underline decoration-paper-50/30 underline-offset-4"
+                        className="text-content underline decoration-paper-50/30 underline-offset-4"
                       >
                         {office}
                       </a>
@@ -187,14 +187,14 @@ export function Footer() {
         </div>
 
         {/* --- Legal ---------------------------------------------------- */}
-        <div className="mt-14 border-t border-paper-50/12 pt-8">
-          <p className="max-w-[92ch] text-micro leading-relaxed text-paper-100/45">
+        <div className="mt-14 border-t border-line pt-8">
+          <p className="max-w-[92ch] text-micro leading-relaxed text-content-subtle">
             {agencyConfig.independenceNotice}
           </p>
-          <p className="mt-3 max-w-[92ch] text-micro leading-relaxed text-paper-100/45">
+          <p className="mt-3 max-w-[92ch] text-micro leading-relaxed text-content-subtle">
             {agencyConfig.projectDataDisclaimer}
           </p>
-          <p className="mt-6 text-micro text-paper-100/35">
+          <p className="mt-6 text-micro text-content-subtle">
             © {year} {agencyConfig.legalName}. All rights reserved. Project names
             and trademarks referenced on this site belong to their respective
             owners.

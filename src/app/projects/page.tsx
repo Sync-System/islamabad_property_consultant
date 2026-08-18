@@ -59,23 +59,23 @@ export default function ProjectsPage() {
           <Container>
             <Reveal>
               <nav aria-label="Breadcrumb">
-                <ol className="flex items-center gap-2 text-micro text-ink-500">
+                <ol className="flex items-center gap-2 text-micro text-content-subtle">
                   <li>
-                    <Link href="/" className="hover:text-ink-900">
+                    <Link href="/" className="hover:text-content">
                       Home
                     </Link>
                   </li>
                   <li aria-hidden="true">/</li>
-                  <li aria-current="page" className="text-ink-900">
+                  <li aria-current="page" className="text-content">
                     Projects
                   </li>
                 </ol>
               </nav>
 
-              <h1 className="optical-left mt-8 max-w-3xl text-h1 text-ink-900">
+              <h1 className="optical-left mt-8 max-w-3xl text-h1 text-content">
                 Projects we advise on
               </h1>
-              <p className="mt-7 max-w-[54ch] text-lead text-ink-600">
+              <p className="mt-7 max-w-[54ch] text-lead text-content-muted">
                 We take on a project only once we can source its published
                 detail. Each page below carries the developer&rsquo;s figures,
                 our attribution, and a direct line to a consultant.
@@ -83,22 +83,22 @@ export default function ProjectsPage() {
             </Reveal>
 
             <Reveal delay={120}>
-              <dl className="mt-12 grid grid-cols-2 gap-6 border-y border-ink-900/12 py-7 sm:grid-cols-4">
+              <dl className="mt-12 grid grid-cols-2 gap-6 border-y border-line py-7 sm:grid-cols-4">
                 <div>
-                  <dt className="eyebrow text-ink-500">Live projects</dt>
-                  <dd className="tabular mt-2 font-display text-h4 text-ink-900">
+                  <dt className="eyebrow text-content-subtle">Live projects</dt>
+                  <dd className="tabular mt-2 font-display text-h4 text-content">
                     {allProjects.length}
                   </dd>
                 </div>
                 <div>
-                  <dt className="eyebrow text-ink-500">Cities</dt>
-                  <dd className="mt-2 text-body-sm font-medium text-ink-900">
+                  <dt className="eyebrow text-content-subtle">Cities</dt>
+                  <dd className="mt-2 text-body-sm font-medium text-content">
                     {projectFacets.cities.join(", ")}
                   </dd>
                 </div>
                 <div className="col-span-2">
-                  <dt className="eyebrow text-ink-500">Property types</dt>
-                  <dd className="mt-2 text-body-sm font-medium text-ink-900">
+                  <dt className="eyebrow text-content-subtle">Property types</dt>
+                  <dd className="mt-2 text-body-sm font-medium text-content">
                     {projectFacets.types.join(" · ")}
                   </dd>
                 </div>
@@ -113,14 +113,14 @@ export default function ProjectsPage() {
               <Reveal
                 as="li"
                 delay={120}
-                className="flex flex-col justify-between border border-dashed border-ink-900/25 bg-paper-100 p-8"
+                className="flex flex-col justify-between border border-dashed border-line bg-surface-alt p-8"
               >
                 <div>
-                  <p className="eyebrow text-brass-700">Looking for something else?</p>
-                  <h2 className="mt-5 font-display text-h3 text-ink-900">
+                  <p className="eyebrow text-accent">Looking for something else?</p>
+                  <h2 className="mt-5 font-display text-h3 text-content">
                     Tell us what you are trying to buy
                   </h2>
-                  <p className="mt-4 text-body-sm text-ink-600">
+                  <p className="mt-4 text-body-sm text-content-muted">
                     Plots, houses, apartments or commercial — if we do not cover
                     it, we will say so rather than sell you something adjacent.
                   </p>

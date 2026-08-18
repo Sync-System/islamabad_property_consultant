@@ -54,15 +54,15 @@ export function Destinations({ project }: { project: Project }) {
                   aria-hidden="true"
                   className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-ink-950/75 to-transparent"
                 />
-                <p className="absolute left-5 top-5 eyebrow text-brass-300">
+                <p className="absolute left-5 top-5 eyebrow text-accent">
                   {destination.eyebrow}
                 </p>
               </div>
 
-              <h3 className="mt-6 font-display text-h3 text-ink-900">
+              <h3 className="mt-6 font-display text-h3 text-content">
                 {destination.name}
               </h3>
-              <p className="mt-4 text-body-sm text-ink-600">
+              <p className="mt-4 text-body-sm text-content-muted">
                 {destination.description}
               </p>
 
@@ -71,7 +71,7 @@ export function Destinations({ project }: { project: Project }) {
                   {destination.facilities.map((facility) => (
                     <li
                       key={facility}
-                      className="border border-ink-900/15 px-2.5 py-1 text-[0.6875rem] tracking-[0.04em] text-ink-600"
+                      className="border border-line px-2.5 py-1 text-[0.6875rem] tracking-[0.04em] text-content-muted"
                     >
                       {facility}
                     </li>

@@ -29,14 +29,14 @@ export function LogoMark({
       {title && <title>{title}</title>}
 
       {/* Back gable — taller, thinner, mostly gold with a dark trailing edge. */}
-      <polygon points="95,18 28,208 95,208" fill="var(--color-brass-500)" />
-      <polygon points="95,18 95,208 118,208" fill="var(--color-ink-900)" />
+      <polygon points="95,18 28,208 95,208" fill="var(--accent-strong)" />
+      <polygon points="95,18 95,208 118,208" fill="var(--content)" />
 
       {/* Front house — roof and body split down the centre. */}
-      <polygon points="150,68 92,150 150,150" fill="var(--color-brass-500)" />
-      <polygon points="150,68 150,150 208,150" fill="var(--color-ink-900)" />
-      <rect x="92" y="150" width="58" height="80" fill="var(--color-brass-500)" />
-      <rect x="150" y="150" width="58" height="80" fill="var(--color-ink-900)" />
+      <polygon points="150,68 92,150 150,150" fill="var(--accent-strong)" />
+      <polygon points="150,68 150,150 208,150" fill="var(--content)" />
+      <rect x="92" y="150" width="58" height="80" fill="var(--accent-strong)" />
+      <rect x="150" y="150" width="58" height="80" fill="var(--content)" />
 
       {/* Four-pane window on the front facade's dark half. */}
       <rect
@@ -44,12 +44,12 @@ export function LogoMark({
         y="168"
         width="36"
         height="36"
-        fill="var(--color-paper-50)"
-        stroke="var(--color-brass-400)"
+        fill="var(--surface)"
+        stroke="var(--accent)"
         strokeWidth="2"
       />
-      <rect x="176" y="168" width="4" height="36" fill="var(--color-ink-900)" />
-      <rect x="160" y="184" width="36" height="4" fill="var(--color-ink-900)" />
+      <rect x="176" y="168" width="4" height="36" fill="var(--content)" />
+      <rect x="160" y="184" width="36" height="4" fill="var(--content)" />
     </svg>
   );
 }

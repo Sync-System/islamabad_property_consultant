@@ -65,13 +65,13 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f7f7fd" },
-    { media: "(prefers-color-scheme: dark)", color: "#02071d" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b1220" },
   ],
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  colorScheme: "light",
+  colorScheme: "light dark",
 };
 
 export default function RootLayout({
@@ -80,6 +80,16 @@ export default function RootLayout({
   return (
     <html lang="en-PK" className={`${display.variable} ${sans.variable}`}>
       <head>
+        {/* Applies the stored theme before first paint. Inline and
+            render-blocking on purpose: anything async would let the wrong
+            theme paint first. Falls through to the OS preference when the
+            visitor has never chosen, which is why it writes the attribute
+            only for an explicit choice. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var c=localStorage.getItem("ipc.theme");var d=c==="dark"||(!c&&matchMedia("(prefers-color-scheme: dark)").matches);if(c){document.documentElement.setAttribute("data-theme",c);}document.documentElement.style.colorScheme=d?"dark":"light";}catch(e){}})()`,
+          }}
+        />
         <script
           type="application/ld+json"
           // Static, developer-authored payload — no user input reaches it.
@@ -95,7 +105,7 @@ export default function RootLayout({
       <body className="antialiased">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-ink-900 focus:px-5 focus:py-3 focus:text-paper-50"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-surface-feature focus:px-5 focus:py-3 focus:text-content"
         >
           Skip to content
         </a>

@@ -78,7 +78,7 @@ export function PaymentPlan({ project }: { project: Project }) {
               <div
                 role="tablist"
                 aria-label="Plot category"
-                className="inline-flex border border-ink-900/15"
+                className="inline-flex border border-line"
               >
                 {plan.groups.map((g) => {
                   const selected = g.id === group.id;
@@ -91,8 +91,8 @@ export function PaymentPlan({ project }: { project: Project }) {
                       onClick={() => setActiveGroup(g.id)}
                       className={`min-h-12 px-5 text-[0.8125rem] font-semibold transition-colors duration-300 sm:px-7 ${
                         selected
-                          ? "bg-ink-900 text-paper-50"
-                          : "text-ink-600 hover:bg-ink-900/5 hover:text-ink-900"
+                          ? "bg-surface-feature text-content"
+                          : "text-content-muted hover:bg-content/5 hover:text-content"
                       }`}
                     >
                       {g.label}
@@ -101,7 +101,7 @@ export function PaymentPlan({ project }: { project: Project }) {
                 })}
               </div>
 
-              <p className="text-micro text-ink-500">
+              <p className="text-micro text-content-subtle">
                 Figures in {plan.currency}. Source: {plan.source.label}
                 {plan.source.checkedOn ? `, checked ${plan.source.checkedOn}` : ""}.
               </p>
@@ -110,14 +110,14 @@ export function PaymentPlan({ project }: { project: Project }) {
 
           {/* --- Desktop table --------------------------------------------- */}
           <Reveal delay={140} className="mt-8 hidden lg:block">
-            <div className="overflow-x-auto border border-ink-900/12">
+            <div className="overflow-x-auto border border-line">
               <table className="w-full border-collapse text-left">
                 <caption className="sr-only">
                   {group.label} payment schedule for {project.name}, showing
                   lump-sum and instalment prices in {plan.currency}.
                 </caption>
                 <thead>
-                  <tr className="bg-ink-900 text-paper-50">
+                  <tr className="bg-surface-feature text-content">
                     <th scope="col" rowSpan={2} className="px-5 py-4 align-bottom text-[0.75rem] font-semibold tracking-[0.08em] uppercase">
                       Size
                     </th>
@@ -129,22 +129,22 @@ export function PaymentPlan({ project }: { project: Project }) {
                         key={t.id}
                         scope="col"
                         colSpan={t.id === "lump-sum" ? 1 : 2}
-                        className="border-l border-paper-50/15 px-5 pb-2 pt-4 text-center text-[0.75rem] font-semibold tracking-[0.08em] uppercase"
+                        className="border-l border-line px-5 pb-2 pt-4 text-center text-[0.75rem] font-semibold tracking-[0.08em] uppercase"
                       >
                         {t.label}
-                        <span className="mt-1 block text-[0.625rem] font-normal normal-case tracking-normal text-paper-100/60">
+                        <span className="mt-1 block text-[0.625rem] font-normal normal-case tracking-normal text-content-muted">
                           {t.structure}
                         </span>
                       </th>
                     ))}
                   </tr>
-                  <tr className="bg-ink-800 text-paper-100">
+                  <tr className="bg-surface-alt text-content-muted">
                     {plan.tenures.map((t) =>
                       t.id === "lump-sum" ? (
                         <th
                           key={t.id}
                           scope="col"
-                          className="border-l border-paper-50/12 px-5 py-2.5 text-right text-[0.6875rem] font-medium"
+                          className="border-l border-line px-5 py-2.5 text-right text-[0.6875rem] font-medium"
                         >
                           Price
                         </th>
@@ -153,7 +153,7 @@ export function PaymentPlan({ project }: { project: Project }) {
                           <th
                             key={`${t.id}-price`}
                             scope="col"
-                            className="border-l border-paper-50/12 px-5 py-2.5 text-right text-[0.6875rem] font-medium"
+                            className="border-l border-line px-5 py-2.5 text-right text-[0.6875rem] font-medium"
                           >
                             Sale price
                           </th>,
@@ -173,15 +173,15 @@ export function PaymentPlan({ project }: { project: Project }) {
                   {group.rows.map((row, i) => (
                     <tr
                       key={row.size}
-                      className={i % 2 ? "bg-paper-100/60" : "bg-paper-50"}
+                      className={i % 2 ? "bg-surface-alt" : "bg-surface"}
                     >
                       <th
                         scope="row"
-                        className="px-5 py-4 font-display text-[1.25rem] text-ink-900"
+                        className="px-5 py-4 font-display text-[1.25rem] text-content"
                       >
                         {row.size}
                       </th>
-                      <td className="tabular px-5 py-4 text-[0.875rem] text-ink-600">
+                      <td className="tabular px-5 py-4 text-[0.875rem] text-content-muted">
                         {row.processingFee}
                       </td>
                       {plan.tenures.map((t) => {
@@ -189,7 +189,7 @@ export function PaymentPlan({ project }: { project: Project }) {
                         return t.id === "lump-sum" ? (
                           <td
                             key={t.id}
-                            className="tabular border-l border-ink-900/8 px-5 py-4 text-right text-[0.9375rem] font-semibold text-ink-900"
+                            className="tabular border-l border-line px-5 py-4 text-right text-[0.9375rem] font-semibold text-content"
                           >
                             {cell?.salePrice ?? "—"}
                           </td>
@@ -197,13 +197,13 @@ export function PaymentPlan({ project }: { project: Project }) {
                           [
                             <td
                               key={`${t.id}-p`}
-                              className="tabular border-l border-ink-900/8 px-5 py-4 text-right text-[0.9375rem] text-ink-800"
+                              className="tabular border-l border-line px-5 py-4 text-right text-[0.9375rem] text-content"
                             >
                               {cell?.salePrice ?? "—"}
                             </td>,
                             <td
                               key={`${t.id}-d`}
-                              className="tabular px-5 py-4 text-right text-[0.875rem] text-ink-600"
+                              className="tabular px-5 py-4 text-right text-[0.875rem] text-content-muted"
                             >
                               {cell?.downPayment ?? "—"}
                             </td>,
@@ -235,8 +235,8 @@ export function PaymentPlan({ project }: { project: Project }) {
                     onClick={() => setActiveTenure(t.id)}
                     className={`min-h-11 shrink-0 border px-4 text-[0.8125rem] font-semibold transition-colors duration-300 ${
                       selected
-                        ? "border-ink-900 bg-ink-900 text-paper-50"
-                        : "border-ink-900/15 text-ink-600"
+                        ? "border-line-strong bg-surface-feature text-content"
+                        : "border-line text-content-muted"
                     }`}
                   >
                     {t.label}
@@ -245,7 +245,7 @@ export function PaymentPlan({ project }: { project: Project }) {
               })}
             </div>
 
-            <p className="mt-4 text-body-sm text-ink-600">{tenure.structure}</p>
+            <p className="mt-4 text-body-sm text-content-muted">{tenure.structure}</p>
 
             <ul className="mt-5 space-y-4">
               {group.rows.map((row, index) => {
@@ -255,33 +255,33 @@ export function PaymentPlan({ project }: { project: Project }) {
                     as="li"
                     key={row.size}
                     delay={index * 70}
-                    className="border border-ink-900/12 bg-paper-50 p-6"
+                    className="border border-line bg-surface p-6"
                   >
                     <div className="flex items-baseline justify-between gap-4">
-                      <h3 className="font-display text-h4 text-ink-900">{row.size}</h3>
-                      <span className="eyebrow text-ink-500">{group.label}</span>
+                      <h3 className="font-display text-h4 text-content">{row.size}</h3>
+                      <span className="eyebrow text-content-subtle">{group.label}</span>
                     </div>
 
                     <dl className="mt-5 space-y-3.5 text-[0.875rem]">
-                      <div className="flex items-baseline justify-between gap-4 border-b border-ink-900/8 pb-3.5">
-                        <dt className="text-ink-500">
+                      <div className="flex items-baseline justify-between gap-4 border-b border-line pb-3.5">
+                        <dt className="text-content-subtle">
                           {tenure.id === "lump-sum" ? "Lump-sum price" : "Sale price"}
                         </dt>
-                        <dd className="tabular text-[1.0625rem] font-semibold text-ink-900">
+                        <dd className="tabular text-[1.0625rem] font-semibold text-content">
                           {plan.currency} {cell?.salePrice ?? "—"}
                         </dd>
                       </div>
                       {cell?.downPayment && (
-                        <div className="flex items-baseline justify-between gap-4 border-b border-ink-900/8 pb-3.5">
-                          <dt className="text-ink-500">20% down payment</dt>
-                          <dd className="tabular font-medium text-ink-800">
+                        <div className="flex items-baseline justify-between gap-4 border-b border-line pb-3.5">
+                          <dt className="text-content-subtle">20% down payment</dt>
+                          <dd className="tabular font-medium text-content">
                             {plan.currency} {cell.downPayment}
                           </dd>
                         </div>
                       )}
                       <div className="flex items-baseline justify-between gap-4">
-                        <dt className="text-ink-500">Processing fee</dt>
-                        <dd className="tabular font-medium text-ink-800">
+                        <dt className="text-content-subtle">Processing fee</dt>
+                        <dd className="tabular font-medium text-content">
                           {plan.currency} {row.processingFee}
                         </dd>
                       </div>
@@ -307,11 +307,11 @@ export function PaymentPlan({ project }: { project: Project }) {
           {/* --- Conditions and CTA ---------------------------------------- */}
           <div className="mt-12 grid gap-10 lg:grid-cols-12 lg:gap-16">
             <Reveal className="lg:col-span-7">
-              <h3 className="eyebrow text-brass-700">Conditions published with the schedule</h3>
+              <h3 className="eyebrow text-accent">Conditions published with the schedule</h3>
               <ul className="mt-5 space-y-3">
                 {plan.notes.map((note) => (
-                  <li key={note} className="flex items-start gap-3 text-body-sm text-ink-600">
-                    <CheckIcon size={17} className="mt-1 shrink-0 text-pine-600" />
+                  <li key={note} className="flex items-start gap-3 text-body-sm text-content-muted">
+                    <CheckIcon size={17} className="mt-1 shrink-0 text-accent" />
                     <span>{note}</span>
                   </li>
                 ))}
@@ -319,9 +319,9 @@ export function PaymentPlan({ project }: { project: Project }) {
             </Reveal>
 
             <Reveal delay={120} className="lg:col-span-5">
-              <div className="border border-brass-600/30 bg-brass-500/8 p-7">
-                <p className="flex items-start gap-3 text-body-sm text-ink-800">
-                  <AlertIcon size={19} className="mt-0.5 shrink-0 text-brass-700" />
+              <div className="border border-accent/30 bg-accent/8 p-7">
+                <p className="flex items-start gap-3 text-body-sm text-content">
+                  <AlertIcon size={19} className="mt-0.5 shrink-0 text-accent" />
                   <span>{plan.freshnessNote}</span>
                 </p>
                 <WhatsAppLink
@@ -334,7 +334,7 @@ export function PaymentPlan({ project }: { project: Project }) {
                 >
                   Get the latest payment plan
                 </WhatsAppLink>
-                <p className="mt-4 text-micro text-ink-500">
+                <p className="mt-4 text-micro text-content-subtle">
                   The official application form is issued by the developer. We
                   will point you to the current version and walk you through it.
                 </p>

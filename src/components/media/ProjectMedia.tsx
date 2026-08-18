@@ -28,7 +28,6 @@ interface ProjectMediaProps {
   sizes?: string;
   /** LCP candidate — set on the hero image only. */
   priority?: boolean;
-  tone?: "light" | "dark";
   seed?: string | number;
   /** Overrides `media.ratio`. */
   ratio?: string;
@@ -41,7 +40,6 @@ export function ProjectMedia({
   className = "",
   sizes = "100vw",
   priority = false,
-  tone = "dark",
   seed = 0,
   ratio,
   fill = true,
@@ -50,7 +48,7 @@ export function ProjectMedia({
 
   return (
     <div
-      className={`relative overflow-hidden bg-ink-900 ${className}`}
+      className={`relative overflow-hidden bg-surface-feature ${className}`}
       style={aspect ? { aspectRatio: aspect } : undefined}
     >
       {media.src ? (
@@ -66,7 +64,6 @@ export function ProjectMedia({
         <ProjectArt
           variant={media.art ?? "contour"}
           seed={seed}
-          tone={tone}
           className="absolute inset-0 h-full w-full"
         />
       )}

@@ -9,13 +9,19 @@ import { Reveal } from "./Reveal";
  * rather than arbitrary gaps.
  */
 
+/**
+ * Section tones are semantic, not literal colours. `ink` and `pine` were
+ * hard-coded dark bands; they now both resolve to the theme's most-contrasted
+ * surface, which is light in the light theme and dark in the dark one. The
+ * names are kept so every call site does not have to change at once.
+ */
 type Tone = "paper" | "paper-alt" | "ink" | "pine";
 
 const TONES: Record<Tone, string> = {
-  paper: "bg-paper-50 text-ink-900",
-  "paper-alt": "bg-paper-100 text-ink-900",
-  ink: "bg-ink-950 text-paper-100",
-  pine: "bg-pine-950 text-paper-100",
+  paper: "bg-surface text-content",
+  "paper-alt": "bg-surface-alt text-content",
+  ink: "bg-surface-feature text-content",
+  pine: "bg-surface-feature text-content",
 };
 
 type Width = "content" | "editorial" | "wide" | "full";
@@ -92,7 +98,6 @@ interface SectionHeaderProps {
   /** Heading level. Sections are h2 by default. */
   as?: "h2" | "h3";
   id?: string;
-  tone?: "light" | "dark";
 }
 
 export function SectionHeader({
@@ -104,11 +109,12 @@ export function SectionHeader({
   className = "",
   as: Heading = "h2",
   id,
-  tone = "light",
 }: SectionHeaderProps) {
-  const muted = tone === "dark" ? "text-paper-100/65" : "text-ink-600";
-  const rule = tone === "dark" ? "bg-brass-400/50" : "bg-brass-600/45";
-  const eyebrowColor = tone === "dark" ? "text-brass-300" : "text-brass-700";
+  // No tone branch: surfaces follow the theme, so one set of tokens is correct
+  // on every section.
+  const muted = "text-content-muted";
+  const rule = "bg-accent/45";
+  const eyebrowColor = "text-accent";
 
   const heading = (
     <div className={align === "center" ? "text-center" : ""}>

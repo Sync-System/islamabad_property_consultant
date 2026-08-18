@@ -101,7 +101,7 @@ export function ProjectGallery({ project }: { project: Project }) {
                   <ExpandIcon size={17} />
                 </span>
                 {media.caption && (
-                  <span className="mt-2.5 block text-micro text-ink-500">
+                  <span className="mt-2.5 block text-micro text-content-subtle">
                     {media.caption}
                   </span>
                 )}
@@ -112,17 +112,26 @@ export function ProjectGallery({ project }: { project: Project }) {
         </ul>
 
         <Reveal delay={100} className="mt-10">
-          <div className="flex flex-col gap-5 border-t border-ink-900/10 pt-7 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-5 border-t border-line pt-7 sm:flex-row sm:items-center sm:justify-between">
+            {/* The copy lives in its own span: the paragraph is a flex
+                container, so an inline element as a direct child would become
+                a separate flex item and break the sentence into side-by-side
+                columns. */}
             {(contextual || illustrative) && (
-              <p className="flex max-w-[62ch] items-start gap-3 text-micro leading-relaxed text-ink-500">
-                <InfoIcon size={16} className="mt-0.5 shrink-0 text-brass-700" />
-                These are photographs of Islamabad and the Margalla Hills,
-                published under Creative Commons licences and credited
-                individually. They show the city and the range the project sits
-                in — <strong className="font-semibold">they are not
-                photographs of the Margalla Enclave site</strong>. We will
-                publish site photography once we hold the rights to it. Ask us
-                for the developer&rsquo;s current imagery on WhatsApp.
+              <p className="flex max-w-[62ch] items-start gap-3 text-micro leading-relaxed text-content-subtle">
+                <InfoIcon size={16} className="mt-0.5 shrink-0 text-accent" />
+                <span>
+                  These are photographs of Islamabad and the Margalla Hills,
+                  published under Creative Commons licences and credited
+                  individually. They show the city and the range the project
+                  sits in —{" "}
+                  <strong className="font-semibold text-content">
+                    they are not photographs of the Margalla Enclave site
+                  </strong>
+                  . We will publish site photography once we hold the rights to
+                  it. Ask us for the developer&rsquo;s current imagery on
+                  WhatsApp.
+                </span>
               </p>
             )}
             <WhatsAppLink
@@ -226,6 +235,9 @@ function Lightbox({
       role="dialog"
       aria-modal="true"
       aria-label={`Gallery image ${index + 1} of ${items.length}`}
+      /* Deliberately dark in both themes: a lightbox exists to show photographs,
+         and a white full-screen backdrop would wash them out. Everything inside
+         therefore uses the fixed `paper-*` ramp, not the semantic tokens. */
       className="fixed inset-0 z-[70] flex flex-col bg-ink-950/97 backdrop-blur-sm"
       onTouchStart={(e) => {
         touchStart.current = e.touches[0].clientX;
@@ -238,14 +250,14 @@ function Lightbox({
       }}
     >
       <div className="flex items-center justify-between gap-4 px-4 py-4 sm:px-8">
-        <p className="tabular text-[0.8125rem] text-paper-100/65">
+        <p className="tabular text-[0.8125rem] text-paper-100/70">
           {String(index + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
         </p>
         <button
           ref={closeRef}
           type="button"
           onClick={onClose}
-          className="grid size-11 place-items-center border border-paper-50/25 text-paper-50 transition-colors hover:bg-paper-50 hover:text-ink-900"
+          className="grid size-11 place-items-center border border-paper-50/25 text-paper-50 transition-colors hover:bg-paper-50 hover:text-ink-950"
         >
           <CloseIcon size={20} />
           <span className="sr-only">Close gallery</span>
@@ -271,7 +283,7 @@ function Lightbox({
         <button
           type="button"
           onClick={() => go(-1)}
-          className="grid size-12 place-items-center border border-paper-50/25 text-paper-50 transition-colors hover:bg-paper-50 hover:text-ink-900"
+          className="grid size-12 place-items-center border border-paper-50/25 text-paper-50 transition-colors hover:bg-paper-50 hover:text-ink-950"
         >
           <ArrowIcon size={20} className="rotate-180" />
           <span className="sr-only">Previous image</span>
@@ -279,7 +291,7 @@ function Lightbox({
         <button
           type="button"
           onClick={() => go(1)}
-          className="grid size-12 place-items-center border border-paper-50/25 text-paper-50 transition-colors hover:bg-paper-50 hover:text-ink-900"
+          className="grid size-12 place-items-center border border-paper-50/25 text-paper-50 transition-colors hover:bg-paper-50 hover:text-ink-950"
         >
           <ArrowIcon size={20} />
           <span className="sr-only">Next image</span>

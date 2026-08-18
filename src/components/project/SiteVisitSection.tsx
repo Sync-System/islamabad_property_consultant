@@ -25,7 +25,7 @@ export function SiteVisitSection({ project }: { project: Project }) {
   return (
     <Section id="site-visit" tone="ink" aria-labelledby="site-visit-title">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.18]">
-        <ProjectArt variant="street" seed="site-visit" tone="dark" className="h-full w-full" />
+        <ProjectArt variant="street" seed="site-visit" className="h-full w-full" />
       </div>
       <div
         aria-hidden="true"
@@ -37,16 +37,16 @@ export function SiteVisitSection({ project }: { project: Project }) {
           <div className="lg:col-span-6">
             <Reveal>
               <p className="flex items-center gap-3.5">
-                <span className="h-px w-8 bg-brass-400/60" aria-hidden="true" />
-                <span className="eyebrow text-brass-300">Site visit</span>
+                <span className="h-px w-8 bg-accent/60" aria-hidden="true" />
+                <span className="eyebrow text-accent">Site visit</span>
               </p>
               <h2
                 id="site-visit-title"
-                className="optical-left mt-5 text-h2 text-paper-50"
+                className="optical-left mt-5 text-h2 text-content"
               >
                 Want to visit {project.shortName}?
               </h2>
-              <p className="mt-6 max-w-[48ch] text-body-lg text-paper-100/75">
+              <p className="mt-6 max-w-[48ch] text-body-lg text-content-muted">
                 Reading about a site is not the same as standing on it. Tell us
                 when suits you and we will arrange a guided visit.
               </p>
@@ -58,9 +58,9 @@ export function SiteVisitSection({ project }: { project: Project }) {
                   as="li"
                   key={item}
                   delay={index * 80}
-                  className="flex items-start gap-3.5 text-body-sm text-paper-100/70"
+                  className="flex items-start gap-3.5 text-body-sm text-content-muted"
                 >
-                  <CheckIcon size={18} className="mt-0.5 shrink-0 text-brass-400" />
+                  <CheckIcon size={18} className="mt-0.5 shrink-0 text-accent" />
                   <span>{item}</span>
                 </Reveal>
               ))}
@@ -70,7 +70,7 @@ export function SiteVisitSection({ project }: { project: Project }) {
           <Reveal delay={140} className="lg:col-span-6">
             {/* A light card on the dark panel: form controls need paper-level
                 contrast, and floating the card gives the section its focus. */}
-            <div className="bg-paper-50 p-6 shadow-dialog sm:p-9">
+            <div className="bg-surface p-6 shadow-dialog sm:p-9">
               <SiteVisitForm project={project} />
             </div>
           </Reveal>

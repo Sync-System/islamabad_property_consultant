@@ -41,10 +41,10 @@ export function Field({
     <div className={className}>
       <label
         htmlFor={id}
-        className="flex items-baseline justify-between gap-3 text-[0.8125rem] font-medium text-ink-800"
+        className="flex items-baseline justify-between gap-3 text-[0.8125rem] font-medium text-content"
       >
         <span>{label}</span>
-        {optional && <span className="text-micro text-ink-500">Optional</span>}
+        {optional && <span className="text-micro text-content-subtle">Optional</span>}
       </label>
 
       {/* Helper text sits under the control, not between label and input:
@@ -53,7 +53,7 @@ export function Field({
       <div className="mt-2">{children({ id, describedBy, invalid: Boolean(error) })}</div>
 
       {hint && (
-        <p id={hintId} className="mt-1.5 text-micro text-ink-500">
+        <p id={hintId} className="mt-1.5 text-micro text-content-subtle">
           {hint}
         </p>
       )}
@@ -77,9 +77,9 @@ interface DataAttrs {
 }
 
 const CONTROL =
-  "w-full min-h-12 border bg-paper-50 px-3.5 py-2.5 text-[0.9375rem] text-ink-900 " +
-  "placeholder:text-ink-500 transition-colors duration-200 " +
-  "focus:outline-none focus-visible:border-pine-600 focus-visible:ring-2 focus-visible:ring-pine-600/25 " +
+  "w-full min-h-12 border bg-surface px-3.5 py-2.5 text-[0.9375rem] text-content " +
+  "placeholder:text-content-subtle transition-colors duration-200 " +
+  "focus:outline-none focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/25 " +
   "aria-[invalid=true]:border-danger-500 aria-[invalid=true]:bg-danger-100/40";
 
 export function TextInput({
@@ -91,7 +91,7 @@ export function TextInput({
     <input
       {...rest}
       aria-invalid={invalid || undefined}
-      className={`${CONTROL} ${invalid ? "border-danger-500" : "border-ink-900/20"} ${className}`}
+      className={`${CONTROL} ${invalid ? "border-danger-500" : "border-line"} ${className}`}
     />
   );
 }
@@ -105,7 +105,7 @@ export function TextArea({
     <textarea
       {...rest}
       aria-invalid={invalid || undefined}
-      className={`${CONTROL} min-h-28 resize-y ${invalid ? "border-danger-500" : "border-ink-900/20"} ${className}`}
+      className={`${CONTROL} min-h-28 resize-y ${invalid ? "border-danger-500" : "border-line"} ${className}`}
     />
   );
 }
@@ -121,14 +121,14 @@ export function Select({
       <select
         {...rest}
         aria-invalid={invalid || undefined}
-        className={`${CONTROL} appearance-none pr-10 ${invalid ? "border-danger-500" : "border-ink-900/20"} ${className}`}
+        className={`${CONTROL} appearance-none pr-10 ${invalid ? "border-danger-500" : "border-line"} ${className}`}
       >
         {children}
       </select>
       <svg
         aria-hidden="true"
         viewBox="0 0 24 24"
-        className="pointer-events-none absolute right-3.5 top-1/2 size-4 -translate-y-1/2 text-ink-500"
+        className="pointer-events-none absolute right-3.5 top-1/2 size-4 -translate-y-1/2 text-content-subtle"
         fill="none"
         stroke="currentColor"
         strokeWidth="1.8"

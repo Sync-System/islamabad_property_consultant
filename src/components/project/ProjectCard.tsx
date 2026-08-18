@@ -24,7 +24,7 @@ export function ProjectCard({
     <Reveal as="li" delay={index * 90} className="group">
       <Link
         href={`/projects/${project.slug}`}
-        className="flex h-full flex-col border border-ink-900/12 bg-paper-50 transition-colors duration-500 hover:border-ink-900/35"
+        className="flex h-full flex-col border border-line bg-surface transition-colors duration-500 hover:border-line-strong"
       >
         <div className="relative overflow-hidden">
           <ProjectMedia
@@ -44,24 +44,24 @@ export function ProjectCard({
         </div>
 
         <div className="flex flex-1 flex-col p-7">
-          <p className="eyebrow text-brass-700">{project.locationLabel}</p>
-          <h3 className="mt-4 font-display text-h3 leading-tight text-ink-900">
+          <p className="eyebrow text-accent">{project.locationLabel}</p>
+          <h3 className="mt-4 font-display text-h3 leading-tight text-content">
             {project.name}
           </h3>
-          <p className="mt-4 flex-1 text-body-sm text-ink-600">{project.summary}</p>
+          <p className="mt-4 flex-1 text-body-sm text-content-muted">{project.summary}</p>
 
           <ul className="mt-6 flex flex-wrap gap-1.5">
             {project.projectType.map((type) => (
               <li
                 key={type}
-                className="border border-ink-900/15 px-2.5 py-1 text-[0.6875rem] text-ink-600"
+                className="border border-line px-2.5 py-1 text-[0.6875rem] text-content-muted"
               >
                 {type}
               </li>
             ))}
           </ul>
 
-          <span className="mt-7 inline-flex items-center gap-2 text-[0.8125rem] font-semibold text-ink-900">
+          <span className="mt-7 inline-flex items-center gap-2 text-[0.8125rem] font-semibold text-content">
             View project
             <ArrowIcon
               size={17}

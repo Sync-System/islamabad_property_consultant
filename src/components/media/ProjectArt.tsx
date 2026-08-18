@@ -20,11 +20,16 @@ interface ProjectArtProps {
   /** Distinguishes gradient ids when several compositions share a page. */
   seed?: string | number;
   className?: string;
-  /** Inverts the palette for use on dark sections. */
-  tone?: "light" | "dark";
 }
 
-/** One drawing palette. Both tones share this exact shape. */
+/**
+ * One drawing palette, expressed as CSS custom properties.
+ *
+ * These resolve at paint time from `globals.css`, which means the artwork
+ * re-tints with the theme on the same frame as the rest of the page — no
+ * re-render, no `useTheme`, no hydration mismatch, and it is already correct
+ * before any JavaScript arrives.
+ */
 interface Palette {
   sky0: string;
   sky1: string;
@@ -40,47 +45,29 @@ interface Palette {
   haze: string;
 }
 
-// Deep navy and orange, matching the site's own `ink`/`brass` tokens (in turn
-// taken from slotta.dev's palette) rather than a literal landscape colour.
-// `water` keeps a small blue-grey allowance — the Lake District is an actual
-// amenity — but nothing else carries a green or gold cast any more.
-const PALETTES: Record<"dark" | "light", Palette> = {
-  dark: {
-    sky0: "#02071d",
-    sky1: "#0b1633",
-    sky2: "#1f2d4b",
-    mid: "#101c3a",
-    near: "#050b1f",
-    line: "#f0995b",
-    accent: "#e97430",
-    water: "#3d5a76",
-    field: "#081027",
-    ridge: ["#344260", "#243252", "#182440", "#0e1830", "#050b1f"],
-    haze: "#505d7a",
-  },
-  light: {
-    sky0: "#f3f4fa",
-    sky1: "#e3e6f0",
-    sky2: "#c7cce0",
-    mid: "#b3b6c9",
-    near: "#8891a8",
-    line: "#ae4200",
-    accent: "#cc5903",
-    water: "#7391a0",
-    field: "#dee1ec",
-    ridge: ["#c3c8dc", "#a7adc6", "#8b92ad", "#707893", "#525a75"],
-    haze: "#e9ebf3",
-  },
+const PALETTE: Palette = {
+  sky0: "var(--art-sky-0)",
+  sky1: "var(--art-sky-1)",
+  sky2: "var(--art-sky-2)",
+  mid: "var(--art-mid)",
+  near: "var(--art-near)",
+  line: "var(--art-line)",
+  accent: "var(--art-accent)",
+  water: "var(--art-water)",
+  field: "var(--art-field)",
+  ridge: [
+    "var(--art-ridge-0)",
+    "var(--art-ridge-1)",
+    "var(--art-ridge-2)",
+    "var(--art-ridge-3)",
+    "var(--art-ridge-4)",
+  ],
+  haze: "var(--art-haze)",
 };
 
-export function ProjectArt({
-  variant,
-  seed = 0,
-  className,
-  tone = "dark",
-}: ProjectArtProps) {
+export function ProjectArt({ variant, seed = 0, className }: ProjectArtProps) {
   const id = `${variant}-${seed}`;
-  const c = PALETTES[tone];
+  const c = PALETTE;
 
   return (
     <svg

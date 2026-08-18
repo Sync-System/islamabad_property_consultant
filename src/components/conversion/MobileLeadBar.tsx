@@ -49,7 +49,7 @@ export function MobileLeadBar({
         visible ? "translate-y-0" : "translate-y-full"
       } transition-transform duration-500 ease-[var(--ease-out-quint)]`}
     >
-      <div className="border-t border-ink-900/10 bg-paper-50/97 pb-safe backdrop-blur-md">
+      <div className="border-t border-line bg-surface/97 pb-safe backdrop-blur-md">
         <div className="grid grid-cols-[1.35fr_1fr_1fr]">
           <WhatsAppLink
             ctaLocation="mobile-sticky"
@@ -71,7 +71,7 @@ export function MobileLeadBar({
               track("phone_click", { ctaLocation: "mobile-sticky" }, getAttribution())
             }
             aria-label={`Call ${agencyConfig.name}`}
-            className="flex min-h-[3.5rem] flex-col items-center justify-center gap-1 border-l border-ink-900/10 text-ink-800"
+            className="flex min-h-[3.5rem] flex-col items-center justify-center gap-1 border-l border-line text-content"
           >
             <PhoneIcon size={19} />
             <span className="text-[0.6875rem] font-semibold tracking-[0.06em] uppercase">
@@ -88,7 +88,7 @@ export function MobileLeadBar({
                 getAttribution(),
               )
             }
-            className="flex min-h-[3.5rem] flex-col items-center justify-center gap-1 border-l border-ink-900/10 text-ink-800"
+            className="flex min-h-[3.5rem] flex-col items-center justify-center gap-1 border-l border-line text-content"
           >
             <CalendarIcon size={19} />
             <span className="text-[0.6875rem] font-semibold tracking-[0.06em] uppercase">

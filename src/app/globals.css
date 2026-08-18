@@ -134,6 +134,153 @@
   --breakpoint-xs: 26.875rem; /* 430px — large phones */
 }
 
+/* --- Semantic surfaces and content ---------------------------------------
+   `@theme inline` is deliberate: it makes `bg-surface` compile to
+   `var(--color-surface)` and resolve at *runtime*, so flipping one attribute on
+   <html> reskins the whole site. A plain `@theme` block bakes values in at
+   build time, and no toggle would be possible.
+
+   Both themes are uniform by design — light is light everywhere, dark is dark
+   everywhere. `surface-feature` is what used to be a hard-coded dark band; it
+   is now just the most-contrasted surface *within* the current theme, so the
+   light theme genuinely has no dark sections. */
+@theme inline {
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+  --color-surface-feature: var(--surface-feature);
+  --color-surface-raised: var(--surface-raised);
+  --color-content: var(--content);
+  --color-content-muted: var(--content-muted);
+  --color-content-subtle: var(--content-subtle);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+}
+
+/* --- Light theme (the default): white everywhere ------------------------- */
+:root {
+  --surface: #ffffff;
+  --surface-alt: #f7f7fd;
+  --surface-feature: #eef0f8;
+  --surface-raised: #ffffff;
+  --content: #101c3a;
+  --content-muted: #475069;
+  --content-subtle: #5e6981;
+  --line: rgb(16 28 58 / 0.12);
+  --line-strong: rgb(16 28 58 / 0.26);
+  --accent: #ae4200;
+  --accent-strong: #cc5903;
+
+  /* Scrims for copy set over photography. The hero keeps its photograph in
+     both themes, so these lighten in the light theme instead of forcing a dark
+     band onto an otherwise white page. */
+  --scrim-0: rgb(255 255 255 / 0.97);
+  --scrim-1: rgb(255 255 255 / 0.82);
+  --scrim-2: rgb(255 255 255 / 0.55);
+}
+
+/* --- Generated artwork palette -------------------------------------------
+   `ProjectArt` draws with these rather than a JS palette object, so the SVG
+   compositions re-tint with the theme on the same frame as everything else —
+   no re-render, no hydration mismatch, and it works before JS arrives. */
+:root {
+  --art-sky-0: #ffffff;
+  --art-sky-1: #eef0f8;
+  --art-sky-2: #dfe3f0;
+  --art-mid: #cdd3e6;
+  --art-near: #aab3cc;
+  --art-line: #ae4200;
+  --art-accent: #cc5903;
+  --art-water: #7391a0;
+  --art-field: #e7e9f3;
+  --art-haze: #f2f4fa;
+  --art-ridge-0: #dfe3f0;
+  --art-ridge-1: #c8cee3;
+  --art-ridge-2: #b0b8d1;
+  --art-ridge-3: #949dba;
+  --art-ridge-4: #78829f;
+}
+
+/* --- Dark theme: dark everywhere ----------------------------------------
+   Declared twice on purpose. The attribute selector serves an explicit
+   choice from the toggle; the media query serves visitors who have expressed
+   no preference here but whose OS is dark. The `:not([data-theme="light"])`
+   guard is what lets an explicit "light" choice win over a dark OS. */
+:root[data-theme="dark"] {
+  --surface: #0b1220;
+  --surface-alt: #101a2e;
+  --surface-feature: #060e1b;
+  --surface-raised: #16213a;
+  --content: #eef1f8;
+  --content-muted: #b9c1d4;
+  --content-subtle: #8e99b3;
+  --line: rgb(238 241 248 / 0.14);
+  --line-strong: rgb(238 241 248 / 0.3);
+  --accent: #f9c191;
+  --accent-strong: #f0995b;
+  --art-sky-0: #02071d;
+  --art-sky-1: #0b1633;
+  --art-sky-2: #1f2d4b;
+  --art-mid: #101c3a;
+  --art-near: #050b1f;
+  --art-line: #f0995b;
+  --art-accent: #e97430;
+  --art-water: #3d5a76;
+  --art-field: #081027;
+  --art-haze: #505d7a;
+  --art-ridge-0: #344260;
+  --art-ridge-1: #243252;
+  --art-ridge-2: #182440;
+  --art-ridge-3: #0e1830;
+  --art-ridge-4: #050b1f;
+
+  /* Scrims for copy set over photography. The hero keeps its photograph in
+     both themes, so these lighten in the light theme instead of forcing a dark
+     band onto an otherwise white page. */
+  --scrim-0: rgb(2 7 29 / 0.97);
+  --scrim-1: rgb(2 7 29 / 0.72);
+  --scrim-2: rgb(2 7 29 / 0.42);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --surface: #0b1220;
+    --surface-alt: #101a2e;
+    --surface-feature: #060e1b;
+    --surface-raised: #16213a;
+    --content: #eef1f8;
+    --content-muted: #b9c1d4;
+    --content-subtle: #8e99b3;
+    --line: rgb(238 241 248 / 0.14);
+    --line-strong: rgb(238 241 248 / 0.3);
+    --accent: #f9c191;
+    --accent-strong: #f0995b;
+    --art-sky-0: #02071d;
+    --art-sky-1: #0b1633;
+    --art-sky-2: #1f2d4b;
+    --art-mid: #101c3a;
+    --art-near: #050b1f;
+    --art-line: #f0995b;
+    --art-accent: #e97430;
+    --art-water: #3d5a76;
+    --art-field: #081027;
+    --art-haze: #505d7a;
+    --art-ridge-0: #344260;
+    --art-ridge-1: #243252;
+    --art-ridge-2: #182440;
+    --art-ridge-3: #0e1830;
+    --art-ridge-4: #050b1f;
+
+    /* Scrims for copy set over photography. The hero keeps its photograph in
+       both themes, so these lighten in the light theme instead of forcing a dark
+       band onto an otherwise white page. */
+    --scrim-0: rgb(2 7 29 / 0.97);
+    --scrim-1: rgb(2 7 29 / 0.72);
+    --scrim-2: rgb(2 7 29 / 0.42);
+  }
+}
+
 /* ==========================================================================
    Base
    ========================================================================== */
@@ -167,8 +314,8 @@
   }
 
   body {
-    background-color: var(--color-paper-50);
-    color: var(--color-ink-900);
+    background-color: var(--surface);
+    color: var(--content);
     font-family: var(--font-sans);
     font-size: var(--text-body);
     line-height: 1.7;
@@ -195,14 +342,14 @@
 
   /* Visible, high-contrast focus for keyboard users only. */
   :focus-visible {
-    outline: 2px solid var(--color-brass-500);
+    outline: 2px solid var(--accent-strong);
     outline-offset: 3px;
     border-radius: var(--radius-xs);
   }
 
   ::selection {
-    background-color: var(--color-pine-800);
-    color: var(--color-paper-50);
+    background-color: var(--accent);
+    color: var(--surface);
   }
 
   /* Reserve space so late-loading media never shifts layout. */

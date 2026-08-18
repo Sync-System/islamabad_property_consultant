@@ -29,11 +29,10 @@ export function InvestmentHighlights({ project }: { project: Project }) {
           title={highlights.title}
           intro={highlights.intro}
           id="highlights-title"
-          tone="dark"
           split
         />
 
-        <ul className="mt-16 grid gap-px overflow-hidden border border-paper-50/12 bg-paper-50/12 sm:grid-cols-2 lg:mt-20 lg:grid-cols-3">
+        <ul className="mt-16 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2 lg:mt-20 lg:grid-cols-3">
           {highlights.items.map((item, index) => {
             const isLast = index === highlights.items.length - 1;
             return (
@@ -41,7 +40,7 @@ export function InvestmentHighlights({ project }: { project: Project }) {
                 as="li"
                 key={item.title}
                 delay={index * 90}
-                className={`group relative isolate overflow-hidden bg-pine-950 p-8 lg:p-10 ${
+                className={`group relative isolate overflow-hidden bg-surface-feature p-8 lg:p-10 ${
                   isLast ? "sm:col-span-2 lg:col-span-1" : ""
                 }`}
               >
@@ -65,7 +64,6 @@ export function InvestmentHighlights({ project }: { project: Project }) {
                       <ProjectArt
                         variant={item.art!}
                         seed={`hl-${index}`}
-                        tone="dark"
                         className="h-full w-full"
                       />
                     )}
@@ -73,25 +71,29 @@ export function InvestmentHighlights({ project }: { project: Project }) {
                 )}
                 <div
                   aria-hidden="true"
-                  className="absolute inset-0 -z-10 bg-gradient-to-t from-pine-950 via-pine-950/85 to-pine-950/55"
+                  className="absolute inset-0 -z-10"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(to top, var(--surface-feature), color-mix(in srgb, var(--surface-feature) 85%, transparent) 55%, color-mix(in srgb, var(--surface-feature) 60%, transparent))",
+                  }}
                 />
 
                 <div className="flex items-baseline gap-4">
-                  <span className="eyebrow tabular text-brass-400/80">
+                  <span className="eyebrow tabular text-accent">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <span className="eyebrow text-paper-100/50">{item.category}</span>
+                  <span className="eyebrow text-content-subtle">{item.category}</span>
                 </div>
 
-                <h3 className="mt-6 text-h4 text-paper-50">{item.title}</h3>
-                <p className="mt-4 text-body-sm text-paper-100/70">{item.body}</p>
+                <h3 className="mt-6 text-h4 text-content">{item.title}</h3>
+                <p className="mt-4 text-body-sm text-content-muted">{item.body}</p>
                 {item.media?.credit && (
-                  <MediaCredit media={item.media} tone="dark" className="mt-3" />
+                  <MediaCredit media={item.media} className="mt-3" />
                 )}
 
                 <span
                   aria-hidden="true"
-                  className="mt-8 block h-px w-10 origin-left scale-x-100 bg-brass-500/60 transition-transform duration-500 ease-[var(--ease-out-quint)] group-hover:scale-x-[2.6]"
+                  className="mt-8 block h-px w-10 origin-left scale-x-100 bg-accent/60 transition-transform duration-500 ease-[var(--ease-out-quint)] group-hover:scale-x-[2.6]"
                 />
               </Reveal>
             );
@@ -99,8 +101,8 @@ export function InvestmentHighlights({ project }: { project: Project }) {
         </ul>
 
         <Reveal delay={120} className="mt-12 lg:mt-14">
-          <div className="flex flex-col gap-5 border-t border-paper-50/12 pt-8 sm:flex-row sm:items-center sm:justify-between">
-            <p className="max-w-[52ch] text-body-sm text-paper-100/65">
+          <div className="flex flex-col gap-5 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
+            <p className="max-w-[52ch] text-body-sm text-content-muted">
               We will not tell you a plot is guaranteed to appreciate. We will
               tell you what is verified, what is not, and what to check before
               you pay anything.
@@ -109,7 +111,7 @@ export function InvestmentHighlights({ project }: { project: Project }) {
               ctaLocation="highlights"
               projectName={project.name}
               projectSlug={project.slug}
-              variant="outlineInverse"
+              variant="outline"
               size="md"
               className="shrink-0"
             >

@@ -188,32 +188,32 @@ export default async function LegalPage(props: PageProps<"/legal/[doc]">) {
         <Section tone="paper" className="pt-[calc(var(--header-h)+3.5rem)]">
           <Container width="content">
             <nav aria-label="Breadcrumb">
-              <ol className="flex items-center gap-2 text-micro text-ink-500">
+              <ol className="flex items-center gap-2 text-micro text-content-subtle">
                 <li>
-                  <Link href="/" className="hover:text-ink-900">
+                  <Link href="/" className="hover:text-content">
                     Home
                   </Link>
                 </li>
                 <li aria-hidden="true">/</li>
-                <li aria-current="page" className="text-ink-900">
+                <li aria-current="page" className="text-content">
                   {entry.title}
                 </li>
               </ol>
             </nav>
 
-            <h1 className="optical-left mt-8 text-h2 text-ink-900">{entry.title}</h1>
-            <p className="mt-5 text-body-lg text-ink-600">{entry.description}</p>
-            <p className="mt-4 text-micro text-ink-500">
+            <h1 className="optical-left mt-8 text-h2 text-content">{entry.title}</h1>
+            <p className="mt-5 text-body-lg text-content-muted">{entry.description}</p>
+            <p className="mt-4 text-micro text-content-subtle">
               Last updated {entry.updated}
             </p>
 
             <div className="mt-14 space-y-12">
               {entry.sections.map((section) => (
                 <section key={section.heading}>
-                  <h2 className="text-h4 text-ink-900">{section.heading}</h2>
+                  <h2 className="text-h4 text-content">{section.heading}</h2>
                   <div className="mt-4 space-y-4">
                     {section.body.map((paragraph, index) => (
-                      <p key={index} className="text-body text-ink-600">
+                      <p key={index} className="text-body text-content-muted">
                         {paragraph}
                       </p>
                     ))}
@@ -222,9 +222,9 @@ export default async function LegalPage(props: PageProps<"/legal/[doc]">) {
               ))}
             </div>
 
-            <div className="mt-14 border-t border-ink-900/12 pt-8">
-              <h2 className="text-h4 text-ink-900">Questions about this page?</h2>
-              <p className="mt-3 text-body-sm text-ink-600">
+            <div className="mt-14 border-t border-line pt-8">
+              <h2 className="text-h4 text-content">Questions about this page?</h2>
+              <p className="mt-3 text-body-sm text-content-muted">
                 Message us on WhatsApp
                 {email ? (
                   <>
@@ -232,7 +232,7 @@ export default async function LegalPage(props: PageProps<"/legal/[doc]">) {
                     or email{" "}
                     <a
                       href={`mailto:${email}`}
-                      className="underline decoration-brass-500/60 underline-offset-4"
+                      className="underline decoration-accent/60 underline-offset-4"
                     >
                       {email}
                     </a>
@@ -243,7 +243,7 @@ export default async function LegalPage(props: PageProps<"/legal/[doc]">) {
               <WhatsAppLink ctaLocation="footer" variant="outline" size="md" className="mt-6">
                 Message {agencyConfig.whatsappDisplay}
               </WhatsAppLink>
-              <p className="mt-8 text-micro leading-relaxed text-ink-500">
+              <p className="mt-8 text-micro leading-relaxed text-content-subtle">
                 These documents are a working draft prepared for this website and
                 are not a substitute for legal advice. Have them reviewed by a
                 qualified lawyer before you rely on them.

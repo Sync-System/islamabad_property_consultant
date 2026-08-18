@@ -14,6 +14,11 @@ export function MediaCredit({
   className = "",
 }: {
   media: Media;
+  /**
+   * `dark` pins the credit to a light colour for use over always-dark media —
+   * the lightbox backdrop, a photograph under a dark gradient. Everywhere else
+   * the default follows the theme.
+   */
   tone?: "light" | "dark";
   className?: string;
 }) {
@@ -21,7 +26,7 @@ export function MediaCredit({
   return (
     <span
       className={`block text-[0.6875rem] leading-relaxed ${
-        tone === "dark" ? "text-paper-100/45" : "text-ink-500/85"
+        tone === "dark" ? "text-paper-100/45" : "text-content-subtle"
       } ${className}`}
     >
       Photo: {media.credit}

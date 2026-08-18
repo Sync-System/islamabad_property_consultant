@@ -38,7 +38,7 @@ export function Faq({ project }: { project: Project }) {
               id="faqs-title"
             />
             <Reveal delay={100}>
-              <p className="mt-6 text-body-sm text-ink-600">
+              <p className="mt-6 text-body-sm text-content-muted">
                 Where an answer comes from the developer&rsquo;s own published
                 material, it says so. Where it is our own guidance, it says that
                 too.
@@ -74,8 +74,8 @@ export function Faq({ project }: { project: Project }) {
             )}
 
             <Reveal delay={220}>
-              <div className="mt-10 border-t border-ink-900/12 pt-7">
-                <p className="text-body-sm text-ink-600">
+              <div className="mt-10 border-t border-line pt-7">
+                <p className="text-body-sm text-content-muted">
                   Still unanswered? Ask us directly — we would rather tell you
                   something is unconfirmed than guess.
                 </p>
@@ -94,7 +94,7 @@ export function Faq({ project }: { project: Project }) {
           </div>
 
           <div className="lg:col-span-8">
-            <ul className="border-t border-ink-900/12">
+            <ul className="border-t border-line">
               {visible.map((faq, index) => (
                 <AccordionRow
                   key={faq.question}
@@ -128,8 +128,8 @@ function FilterChip({
       aria-pressed={active}
       className={`min-h-11 border px-3.5 text-[0.75rem] font-medium transition-colors duration-300 ${
         active
-          ? "border-ink-900 bg-ink-900 text-paper-50"
-          : "border-ink-900/15 text-ink-600 hover:border-ink-900/40"
+          ? "border-line-strong bg-surface-feature text-content"
+          : "border-line text-content-muted hover:border-line-strong"
       }`}
     >
       {children}
@@ -152,7 +152,7 @@ function AccordionRow({
   const buttonId = `faq-button-${index}`;
 
   return (
-    <li className="border-b border-ink-900/12">
+    <li className="border-b border-line">
       <h3>
         <button
           id={buttonId}
@@ -162,13 +162,13 @@ function AccordionRow({
           aria-controls={panelId}
           className="flex w-full items-start gap-5 py-6 text-left"
         >
-          <span className="eyebrow tabular mt-1.5 shrink-0 text-brass-700">
+          <span className="eyebrow tabular mt-1.5 shrink-0 text-accent">
             {String(index + 1).padStart(2, "0")}
           </span>
-          <span className="flex-1 text-h4 text-ink-900">{faq.question}</span>
+          <span className="flex-1 text-h4 text-content">{faq.question}</span>
           <span
             aria-hidden="true"
-            className="mt-1 shrink-0 text-ink-500 transition-transform duration-400 ease-[var(--ease-out-quint)]"
+            className="mt-1 shrink-0 text-content-subtle transition-transform duration-400 ease-[var(--ease-out-quint)]"
           >
             {isOpen ? <MinusIcon size={20} /> : <PlusIcon size={20} />}
           </span>
@@ -185,9 +185,9 @@ function AccordionRow({
       >
         <div className="overflow-hidden">
           <div className="pb-7 pl-[3.25rem] pr-8">
-            <p className="max-w-[62ch] text-body text-ink-600">{faq.answer}</p>
+            <p className="max-w-[62ch] text-body text-content-muted">{faq.answer}</p>
             {faq.source && (
-              <p className="mt-4 text-micro text-ink-500">
+              <p className="mt-4 text-micro text-content-subtle">
                 Source: {faq.source.label}
                 {faq.source.checkedOn ? ` · checked ${faq.source.checkedOn}` : ""}
               </p>

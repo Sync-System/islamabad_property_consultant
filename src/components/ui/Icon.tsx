@@ -121,6 +121,19 @@ export const InfoIcon = (props: IconProps) => (
   </Base>
 );
 
+export const SunIcon = (props: IconProps) => (
+  <Base {...props}>
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2.2M12 19.8V22M4.22 4.22l1.56 1.56M18.22 18.22l1.56 1.56M2 12h2.2M19.8 12H22M4.22 19.78l1.56-1.56M18.22 5.78l1.56-1.56" />
+  </Base>
+);
+
+export const MoonIcon = (props: IconProps) => (
+  <Base {...props}>
+    <path d="M20.5 14.3A8.5 8.5 0 0 1 9.7 3.5a8.5 8.5 0 1 0 10.8 10.8Z" />
+  </Base>
+);
+
 export const MenuIcon = (props: IconProps) => (
   <Base {...props}>
     <path d="M4 7h16M4 12h16M4 17h16" />

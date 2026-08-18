@@ -5,15 +5,13 @@
  * components, `<a>`, `<button>` and `<Link>` can all share it without a
  * wrapper. Variants are named for their role in the conversion hierarchy, not
  * for their colour — `whatsapp` is always the dominant action on any screen.
+ *
+ * There is no longer an "inverse" variant. Sections follow the theme rather
+ * than being hard-coded dark, so `outline` already reads correctly on every
+ * surface and a second variant would only be a way to get it wrong.
  */
 
-export type ButtonVariant =
-  | "whatsapp"
-  | "solid"
-  | "outline"
-  | "outlineInverse"
-  | "ghost"
-  | "quiet";
+export type ButtonVariant = "whatsapp" | "solid" | "outline" | "ghost";
 
 export type ButtonSize = "sm" | "md" | "lg";
 
@@ -33,13 +31,11 @@ const VARIANTS: Record<ButtonVariant, string> = {
   // the palette rather than shouting over it.
   whatsapp:
     "bg-wa-600 text-white hover:bg-wa-700 shadow-[0_1px_2px_rgba(8,11,10,0.12)] hover:shadow-raise",
-  solid: "bg-ink-900 text-paper-50 hover:bg-pine-800",
+  // `solid` inverts against the page: dark on light, light on dark.
+  solid: "bg-content text-surface hover:bg-accent hover:text-surface",
   outline:
-    "border border-ink-900/25 text-ink-900 hover:border-ink-900/60 hover:bg-ink-900 hover:text-paper-50",
-  outlineInverse:
-    "border border-paper-50/30 text-paper-50 hover:border-paper-50 hover:bg-paper-50 hover:text-ink-900",
-  ghost: "text-ink-900 hover:bg-ink-900/6",
-  quiet: "text-paper-50/80 hover:text-paper-50",
+    "border border-line-strong text-content hover:border-content hover:bg-content hover:text-surface",
+  ghost: "text-content hover:bg-content/8",
 };
 
 export function buttonClass(

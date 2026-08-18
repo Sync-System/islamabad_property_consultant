@@ -48,7 +48,7 @@ export function PropertyOptions({ project }: { project: Project }) {
             <div
               role="tablist"
               aria-label="Plot category"
-              className="inline-flex border border-ink-900/15 bg-paper-50"
+              className="inline-flex border border-line bg-surface"
             >
               {types.map((type) => {
                 const selected = type === activeType;
@@ -61,8 +61,8 @@ export function PropertyOptions({ project }: { project: Project }) {
                     onClick={() => setActiveType(type)}
                     className={`min-h-12 px-5 text-[0.8125rem] font-semibold transition-colors duration-300 sm:px-7 ${
                       selected
-                        ? "bg-ink-900 text-paper-50"
-                        : "text-ink-600 hover:bg-ink-900/5 hover:text-ink-900"
+                        ? "bg-surface-feature text-content"
+                        : "text-content-muted hover:bg-content/5 hover:text-content"
                     }`}
                   >
                     {type}
@@ -93,8 +93,8 @@ export function PropertyOptions({ project }: { project: Project }) {
 
         {propertyOptions.allotmentNote && (
           <Reveal delay={120}>
-            <p className="mt-8 flex items-start gap-3 text-body-sm text-ink-600">
-              <InfoIcon size={18} className="mt-0.5 shrink-0 text-brass-700" />
+            <p className="mt-8 flex items-start gap-3 text-body-sm text-content-muted">
+              <InfoIcon size={18} className="mt-0.5 shrink-0 text-accent" />
               {propertyOptions.allotmentNote}
             </p>
           </Reveal>
@@ -125,14 +125,13 @@ function OptionCard({
     <Reveal
       as="li"
       delay={index * 70}
-      className="group flex flex-col border border-ink-900/12 bg-paper-50 transition-colors duration-500 hover:border-ink-900/30"
+      className="group flex flex-col border border-line bg-surface transition-colors duration-500 hover:border-line-strong"
     >
-      <div className="relative aspect-[16/9] overflow-hidden bg-ink-900">
+      <div className="relative aspect-[16/9] overflow-hidden bg-surface-feature">
         {option.art && (
           <ProjectArt
             variant={option.art}
             seed={option.id}
-            tone="dark"
             className="absolute inset-0 h-full w-full transition-transform duration-[900ms] ease-[var(--ease-out-quint)] group-hover:scale-[1.05]"
           />
         )}
@@ -142,15 +141,15 @@ function OptionCard({
         />
         <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5">
           <div>
-            <p className="font-display text-h3 leading-none text-paper-50">
+            <p className="font-display text-h3 leading-none text-content">
               {option.size}
             </p>
             {option.sizeAlt && (
-              <p className="mt-2 eyebrow text-brass-300">{option.sizeAlt}</p>
+              <p className="mt-2 eyebrow text-accent">{option.sizeAlt}</p>
             )}
           </div>
           {option.featured && (
-            <span className="eyebrow rounded-xs bg-brass-500 px-2 py-1 text-[0.5625rem] text-ink-950">
+            <span className="eyebrow rounded-xs bg-accent px-2 py-1 text-[0.5625rem] text-surface">
               Most asked
             </span>
           )}
@@ -158,20 +157,20 @@ function OptionCard({
       </div>
 
       <div className="flex flex-1 flex-col p-6">
-        <p className="eyebrow text-ink-500">{option.purpose}</p>
+        <p className="eyebrow text-content-subtle">{option.purpose}</p>
         {option.description && (
-          <p className="mt-4 text-body-sm text-ink-600">{option.description}</p>
+          <p className="mt-4 text-body-sm text-content-muted">{option.description}</p>
         )}
 
-        <dl className="mt-6 space-y-3 border-t border-ink-900/10 pt-5 text-[0.8125rem] sm:mb-6">
+        <dl className="mt-6 space-y-3 border-t border-line pt-5 text-[0.8125rem] sm:mb-6">
           {price && (
             <div>
-              <dt className="text-ink-500">Lump-sum price</dt>
-              <dd className="tabular mt-1 font-semibold text-ink-900">
+              <dt className="text-content-subtle">Lump-sum price</dt>
+              <dd className="tabular mt-1 font-semibold text-content">
                 {price.value}
               </dd>
               {price.note && (
-                <dd className="mt-1.5 text-micro leading-relaxed text-ink-500">
+                <dd className="mt-1.5 text-micro leading-relaxed text-content-subtle">
                   {price.note}
                 </dd>
               )}
@@ -179,13 +178,13 @@ function OptionCard({
           )}
           {fee && (
             <div className="flex items-baseline justify-between gap-3">
-              <dt className="text-ink-500">Processing fee</dt>
-              <dd className="tabular font-medium text-ink-800">{fee.value}</dd>
+              <dt className="text-content-subtle">Processing fee</dt>
+              <dd className="tabular font-medium text-content">{fee.value}</dd>
             </div>
           )}
           <div className="flex items-baseline justify-between gap-3">
-            <dt className="text-ink-500">Availability</dt>
-            <dd className="text-right font-medium text-brass-700">
+            <dt className="text-content-subtle">Availability</dt>
+            <dd className="text-right font-medium text-accent">
               {isVerified(option.availability)
                 ? option.availability.value
                 : "Confirm with us"}

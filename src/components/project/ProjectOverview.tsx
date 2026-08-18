@@ -25,19 +25,19 @@ export function ProjectOverview({ project }: { project: Project }) {
           <div className="lg:col-span-6 lg:pr-6">
             <Reveal>
               <p className="flex items-center gap-3.5">
-                <span className="h-px w-8 bg-brass-600/45" aria-hidden="true" />
-                <span className="eyebrow text-brass-700">{overview.eyebrow}</span>
+                <span className="h-px w-8 bg-accent/45" aria-hidden="true" />
+                <span className="eyebrow text-accent">{overview.eyebrow}</span>
               </p>
               <h2
                 id="overview-title"
-                className="optical-left mt-5 text-h2 text-ink-900"
+                className="optical-left mt-5 text-h2 text-content"
               >
                 {overview.title}
               </h2>
             </Reveal>
 
             <Reveal delay={120}>
-              <p className="mt-8 border-l-2 border-brass-500/45 pl-6 text-lead text-ink-800">
+              <p className="mt-8 border-l-2 border-accent/45 pl-6 text-lead text-content">
                 {overview.lead}
               </p>
             </Reveal>
@@ -45,7 +45,7 @@ export function ProjectOverview({ project }: { project: Project }) {
             <div className="mt-9 space-y-6">
               {overview.body.map((paragraph, index) => (
                 <Reveal key={index} delay={160 + index * 80}>
-                  <p className="max-w-[58ch] text-body text-ink-600">{paragraph}</p>
+                  <p className="max-w-[58ch] text-body text-content-muted">{paragraph}</p>
                 </Reveal>
               ))}
             </div>
@@ -64,7 +64,7 @@ export function ProjectOverview({ project }: { project: Project }) {
                       className="w-full"
                     />
                     {(primaryMedia.caption || primaryMedia.credit) && (
-                      <figcaption className="mt-3 text-micro text-ink-500">
+                      <figcaption className="mt-3 text-micro text-content-subtle">
                         {primaryMedia.caption}
                         <MediaCredit media={primaryMedia} className="mt-1" />
                       </figcaption>
@@ -84,10 +84,10 @@ export function ProjectOverview({ project }: { project: Project }) {
                       media={secondaryMedia}
                       seed="ov-2"
                       sizes="(max-width: 1024px) 60vw, 26vw"
-                      className="w-full border-4 border-paper-50"
+                      className="w-full border-4 border-line-strong"
                     />
                     {(secondaryMedia.caption || secondaryMedia.credit) && (
-                      <figcaption className="mt-3 text-micro text-ink-500">
+                      <figcaption className="mt-3 text-micro text-content-subtle">
                         {secondaryMedia.caption}
                         <MediaCredit media={secondaryMedia} className="mt-1" />
                       </figcaption>
@@ -99,8 +99,8 @@ export function ProjectOverview({ project }: { project: Project }) {
 
             {overview.pullQuote && (
               <Reveal delay={260}>
-                <blockquote className="mt-14 max-w-[34ch] font-display text-h3 leading-[1.15] text-pine-800 sm:mt-16">
-                  <span aria-hidden="true" className="text-brass-600">
+                <blockquote className="mt-14 max-w-[34ch] font-display text-h3 leading-[1.15] text-content sm:mt-16">
+                  <span aria-hidden="true" className="text-accent">
                     &ldquo;
                   </span>
                   {overview.pullQuote}

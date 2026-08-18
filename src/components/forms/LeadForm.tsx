@@ -244,7 +244,7 @@ export function LeadForm({
         {state === "submitting" ? "Opening WhatsApp…" : "Send on WhatsApp"}
       </button>
 
-      <p className="mt-4 text-micro leading-relaxed text-ink-500">
+      <p className="mt-4 text-micro leading-relaxed text-content-subtle">
         Submitting opens WhatsApp with your details already written out, so you
         can check the message before you send it. We use what you provide only to
         respond to your enquiry.
@@ -257,29 +257,29 @@ function Success({ reference }: { reference: string | null }) {
   return (
     <div
       role="status"
-      className="border border-pine-600/30 bg-pine-500/8 p-8 text-center"
+      className="border border-accent/30 bg-accent/8 p-8 text-center"
     >
-      <span className="mx-auto grid size-12 place-items-center rounded-pill bg-pine-600 text-paper-50">
+      <span className="mx-auto grid size-12 place-items-center rounded-pill bg-accent text-surface">
         <CheckIcon size={22} />
       </span>
-      <h3 className="mt-5 font-display text-h4 text-ink-900">
+      <h3 className="mt-5 font-display text-h4 text-content">
         WhatsApp is open in a new tab
       </h3>
-      <p className="mx-auto mt-3 max-w-[42ch] text-body-sm text-ink-600">
+      <p className="mx-auto mt-3 max-w-[42ch] text-body-sm text-content-muted">
         Your message is written out and ready — press send and a consultant will
         pick it up. If the tab did not open, message us directly on{" "}
         <a
           href={agencyConfig.whatsappBaseUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="font-medium text-pine-700 underline underline-offset-4"
+          className="font-medium text-accent underline underline-offset-4"
         >
           {agencyConfig.whatsappDisplay}
         </a>
         .
       </p>
       {reference && (
-        <p className="tabular mt-4 text-micro text-ink-500">
+        <p className="tabular mt-4 text-micro text-content-subtle">
           Reference {reference}
         </p>
       )}

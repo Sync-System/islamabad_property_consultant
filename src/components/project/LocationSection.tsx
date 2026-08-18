@@ -73,14 +73,14 @@ export function LocationSection({ project }: { project: Project }) {
                     title={`Map of the road and zone ${project.name} addresses`}
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    className="aspect-[3/2] w-full border border-ink-900/12"
+                    className="aspect-[3/2] w-full border border-line"
                   />
                   {/* Google's own resolution of the road/zone, not a plot-accurate
                       pin — we do not have verified boundary coordinates, so this
                       says exactly what it is rather than implying more precision
                       than we have. */}
-                  <p className="mt-3 flex items-start gap-2.5 text-micro text-ink-500">
-                    <InfoIcon size={15} className="mt-px shrink-0 text-brass-700" />
+                  <p className="mt-3 flex items-start gap-2.5 text-micro text-content-subtle">
+                    <InfoIcon size={15} className="mt-px shrink-0 text-accent" />
                     <span>
                       Google Maps&rsquo; own location for {location.road ?? "the road"}{" "}
                       in {location.zone ?? "the zone"} — the general area the
@@ -92,7 +92,7 @@ export function LocationSection({ project }: { project: Project }) {
                             href={location.mapLinkUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="font-medium text-ink-700 underline decoration-brass-500/60 underline-offset-4 hover:text-ink-900"
+                            className="font-medium text-content-muted underline decoration-accent/60 underline-offset-4 hover:text-content"
                           >
                             Open in Google Maps
                           </a>
@@ -108,10 +108,10 @@ export function LocationSection({ project }: { project: Project }) {
                     media={location.media}
                     seed="location"
                     sizes="(max-width: 1024px) 92vw, 58vw"
-                    className="w-full border border-ink-900/12"
+                    className="w-full border border-line"
                   />
-                  <p className="absolute inset-x-4 bottom-4 flex items-start gap-2.5 bg-paper-50/92 p-3.5 text-micro text-ink-600 backdrop-blur-sm">
-                    <InfoIcon size={15} className="mt-px shrink-0 text-brass-700" />
+                  <p className="absolute inset-x-4 bottom-4 flex items-start gap-2.5 bg-surface/92 p-3.5 text-micro text-content-muted backdrop-blur-sm">
+                    <InfoIcon size={15} className="mt-px shrink-0 text-accent" />
                     An interactive map will be published once we have confirmed
                     the exact site boundary with the developer. Ask us for a
                     pinned location on WhatsApp.
@@ -124,10 +124,10 @@ export function LocationSection({ project }: { project: Project }) {
             {/* --- Verified distances ------------------------------------- */}
             <div className="lg:col-span-5">
               <Reveal>
-                <h3 className="eyebrow text-brass-700">Connectivity</h3>
+                <h3 className="eyebrow text-accent">Connectivity</h3>
               </Reveal>
 
-              <ul className="mt-6 divide-y divide-ink-900/10 border-y border-ink-900/10">
+              <ul className="mt-6 divide-y divide-line border-y border-line">
                 {location.nearby.map((place, index) => (
                   <Reveal
                     as="li"
@@ -136,23 +136,23 @@ export function LocationSection({ project }: { project: Project }) {
                     className="flex items-center justify-between gap-5 py-4"
                   >
                     <div className="flex items-center gap-3.5">
-                      <PinIcon size={18} className="shrink-0 text-ink-400" />
+                      <PinIcon size={18} className="shrink-0 text-content-subtle" />
                       <div>
-                        <p className="text-body-sm font-medium text-ink-900">
+                        <p className="text-body-sm font-medium text-content">
                           {place.name}
                         </p>
                         {place.kind && (
-                          <p className="text-micro text-ink-500">{place.kind}</p>
+                          <p className="text-micro text-content-subtle">{place.kind}</p>
                         )}
                       </div>
                     </div>
                     <p className="shrink-0 text-right">
                       {isVerified(place.distance) ? (
-                        <span className="tabular text-body-sm font-semibold text-ink-900">
+                        <span className="tabular text-body-sm font-semibold text-content">
                           {place.distance.value}
                         </span>
                       ) : (
-                        <span className="text-micro text-brass-700">Ask us</span>
+                        <span className="text-micro text-accent">Ask us</span>
                       )}
                     </p>
                   </Reveal>
@@ -160,7 +160,7 @@ export function LocationSection({ project }: { project: Project }) {
               </ul>
 
               <Reveal delay={140}>
-                <p className="mt-4 text-micro leading-relaxed text-ink-500">
+                <p className="mt-4 text-micro leading-relaxed text-content-subtle">
                   Drive times are as published by {project.officialSource.label} and
                   will vary with traffic and your point of origin. We do not
                   publish distances we cannot attribute.
@@ -171,10 +171,10 @@ export function LocationSection({ project }: { project: Project }) {
                 <div className="mt-8 space-y-5">
                   {location.accessNotes.map((note, index) => (
                     <Reveal key={note.title} delay={160 + index * 70}>
-                      <h4 className="font-sans text-body-sm font-semibold text-ink-900">
+                      <h4 className="font-sans text-body-sm font-semibold text-content">
                         {note.title}
                       </h4>
-                      <p className="mt-1.5 text-body-sm text-ink-600">{note.body}</p>
+                      <p className="mt-1.5 text-body-sm text-content-muted">{note.body}</p>
                     </Reveal>
                   ))}
                 </div>
@@ -197,9 +197,9 @@ export function LocationSection({ project }: { project: Project }) {
 
           {isVerified(location.sector) && (
             <Reveal delay={120}>
-              <p className="mt-10 border-l-2 border-brass-500/45 pl-5 text-body-sm text-ink-600">
+              <p className="mt-10 border-l-2 border-accent/45 pl-5 text-body-sm text-content-muted">
                 {location.sector.value}.{" "}
-                <span className="text-ink-500">
+                <span className="text-content-subtle">
                   {location.sector.note} Confirm the sector designation on your
                   allotment documentation.
                 </span>

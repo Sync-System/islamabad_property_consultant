@@ -77,29 +77,29 @@ export function SiteVisitForm({ project }: { project: Project }) {
     return (
       <div
         role="status"
-        className="border border-brass-600/30 bg-brass-500/10 p-8 text-center"
+        className="border border-accent/30 bg-accent/10 p-8 text-center"
       >
-        <span className="mx-auto grid size-12 place-items-center rounded-pill bg-brass-500 text-ink-950">
+        <span className="mx-auto grid size-12 place-items-center rounded-pill bg-accent text-surface">
           <CheckIcon size={22} />
         </span>
-        <h3 className="mt-5 font-display text-h4 text-ink-900">
+        <h3 className="mt-5 font-display text-h4 text-content">
           Your visit request is ready to send
         </h3>
-        <p className="mx-auto mt-3 max-w-[42ch] text-body-sm text-ink-600">
+        <p className="mx-auto mt-3 max-w-[42ch] text-body-sm text-content-muted">
           Check the message in WhatsApp and press send. We will confirm the date,
           the meeting point and what to bring. If the tab did not open, message{" "}
           <a
             href={agencyConfig.whatsappBaseUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-medium text-brass-700 underline underline-offset-4"
+            className="font-medium text-accent underline underline-offset-4"
           >
             {agencyConfig.whatsappDisplay}
           </a>
           .
         </p>
         {reference && (
-          <p className="tabular mt-4 text-micro text-ink-500">
+          <p className="tabular mt-4 text-micro text-content-subtle">
             Reference {reference}
           </p>
         )}
@@ -215,7 +215,7 @@ export function SiteVisitForm({ project }: { project: Project }) {
         {state === "submitting" ? "Opening WhatsApp…" : "Request site visit"}
       </button>
 
-      <p className="mt-4 text-micro leading-relaxed text-ink-500">
+      <p className="mt-4 text-micro leading-relaxed text-content-subtle">
         A visit is confirmed by a consultant on WhatsApp — this form does not
         book a slot on its own.
       </p>

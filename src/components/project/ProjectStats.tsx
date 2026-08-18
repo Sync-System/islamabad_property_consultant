@@ -14,7 +14,7 @@ import { Reveal } from "@/components/ui/Reveal";
 
 export function ProjectStats({ stats }: { stats: Stat[] }) {
   return (
-    <Section tone="ink" compact className="border-b border-paper-50/8">
+    <Section tone="ink" compact className="border-b border-line">
       <Container>
         <dl className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4 lg:gap-x-10">
           {stats.map((stat, index) => (
@@ -26,15 +26,15 @@ export function ProjectStats({ stats }: { stats: Stat[] }) {
               {index > 0 && (
                 <span
                   aria-hidden="true"
-                  className="absolute -left-3 top-1 hidden h-[calc(100%-0.25rem)] w-px bg-paper-50/12 lg:block"
+                  className="absolute -left-3 top-1 hidden h-[calc(100%-0.25rem)] w-px bg-line lg:block"
                 />
               )}
-              <dt className="eyebrow text-brass-300">{stat.label}</dt>
-              <dd className="mt-3 font-display text-h3 leading-none text-paper-50">
+              <dt className="eyebrow text-accent">{stat.label}</dt>
+              <dd className="mt-3 font-display text-h3 leading-none text-content">
                 <Counter value={stat.value} />
               </dd>
               {stat.footnote && (
-                <dd className="mt-3 text-micro leading-relaxed text-paper-100/55">
+                <dd className="mt-3 text-micro leading-relaxed text-content-subtle">
                   {stat.footnote}
                 </dd>
               )}

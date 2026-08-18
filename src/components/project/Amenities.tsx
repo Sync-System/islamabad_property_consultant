@@ -43,7 +43,11 @@ export function Amenities({ project }: { project: Project }) {
       </div>
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 hidden bg-gradient-to-r from-pine-950 via-pine-950/85 to-transparent lg:block"
+        className="pointer-events-none absolute inset-0 hidden lg:block"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, var(--surface-feature), color-mix(in srgb, var(--surface-feature) 85%, transparent) 55%, transparent)",
+        }}
       />
 
       <Container className="relative">
@@ -52,7 +56,6 @@ export function Amenities({ project }: { project: Project }) {
           title={amenities.title}
           intro={amenities.intro}
           id="amenities-title"
-          tone="dark"
           split
         />
 
@@ -62,18 +65,18 @@ export function Amenities({ project }: { project: Project }) {
               as="li"
               key={amenity.title}
               delay={(index % 2) * 90}
-              className="group flex gap-5 border-t border-paper-50/12 pt-6"
+              className="group flex gap-5 border-t border-line pt-6"
             >
               <span
                 aria-hidden="true"
-                className="mt-0.5 shrink-0 text-brass-400 transition-transform duration-500 ease-[var(--ease-out-quint)] group-hover:-translate-y-0.5"
+                className="mt-0.5 shrink-0 text-accent transition-transform duration-500 ease-[var(--ease-out-quint)] group-hover:-translate-y-0.5"
               >
                 <AmenityGlyph name={amenity.icon} size={26} />
               </span>
               <div>
-                <h3 className="text-h4 text-paper-50">{amenity.title}</h3>
+                <h3 className="text-h4 text-content">{amenity.title}</h3>
                 {amenity.description && (
-                  <p className="mt-2.5 text-body-sm text-paper-100/65">
+                  <p className="mt-2.5 text-body-sm text-content-muted">
                     {amenity.description}
                   </p>
                 )}
@@ -84,7 +87,7 @@ export function Amenities({ project }: { project: Project }) {
 
         {amenities.source && (
           <Reveal delay={120}>
-            <p className="mt-12 text-micro text-paper-100/45">
+            <p className="mt-12 text-micro text-content-subtle">
               Amenity list as published by {amenities.source.label}
               {amenities.source.checkedOn
                 ? `, checked ${amenities.source.checkedOn}`
@@ -94,7 +97,7 @@ export function Amenities({ project }: { project: Project }) {
             </p>
           </Reveal>
         )}
-        <MediaCredit media={AMENITIES_BACKDROP} tone="dark" className="mt-3" />
+        <MediaCredit media={AMENITIES_BACKDROP} className="mt-3" />
       </Container>
     </Section>
   );
