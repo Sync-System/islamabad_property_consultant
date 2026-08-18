@@ -1,0 +1,304 @@
+"use client";
+
+import Link from "next/link";
+import { useCallback, useEffect, useRef, useState } from "react";
+import type { NavItem } from "@/lib/config/site";
+import { agencyConfig } from "@/lib/config/agency";
+import { telUrl } from "@/lib/whatsapp";
+import { WhatsAppLink, PhoneLink } from "@/components/conversion/WhatsAppLink";
+import { CloseIcon, MenuIcon, PhoneIcon, WhatsAppIcon } from "@/components/ui/Icon";
+import { Wordmark } from "./Wordmark";
+
+/**
+ * Sticky navigation with scroll-spy and a mobile drawer.
+ *
+ * Two behaviours worth noting:
+ *  - The header is transparent over a dark hero and gains a solid background
+ *    once the hero is behind it. That is one class swap driven by a single
+ *    scroll listener, not a per-frame recomputation.
+ *  - The drawer is a real focus trap with `Escape` handling and background
+ *    scroll lock, because a nav a keyboard user cannot leave is not navigation.
+ */
+
+interface HeaderProps {
+  nav: NavItem[];
+  projectName?: string;
+  projectSlug?: string;
+  /** Sits over a dark hero and starts transparent. */
+  overHero?: boolean;
+}
+
+export function Header({ nav, projectName, projectSlug, overHero = false }: HeaderProps) {
+  const [scrolled, setScrolled] = useState(!overHero);
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState<string | null>(null);
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+
+  /* --- Solid / transparent -------------------------------------------- */
+  useEffect(() => {
+    if (!overHero) return;
+    const onScroll = () => setScrolled(window.scrollY > window.innerHeight * 0.65);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [overHero]);
+
+  /* --- Scroll spy ------------------------------------------------------ */
+  useEffect(() => {
+    const ids = nav.map((item) => item.sectionId).filter(Boolean) as string[];
+    if (ids.length === 0) return;
+
+    const sections = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => Boolean(el));
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // The section occupying the most of the reading band wins.
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]) setActive(visible[0].target.id);
+      },
+      { rootMargin: "-25% 0px -55% 0px", threshold: [0, 0.25, 0.5, 1] },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [nav]);
+
+  /* --- Drawer: scroll lock, Escape, focus trap ------------------------- */
+  const close = useCallback(() => {
+    setOpen(false);
+    toggleRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const { overflow } = document.body.style;
+    document.body.style.overflow = "hidden";
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        close();
+        return;
+      }
+      if (event.key !== "Tab") return;
+
+      const focusable = drawerRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      if (!focusable || focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    // Move focus into the drawer once it is on screen.
+    const timer = window.setTimeout(() => {
+      drawerRef.current?.querySelector<HTMLElement>("a, button")?.focus();
+    }, 60);
+
+    return () => {
+      document.body.style.overflow = overflow;
+      document.removeEventListener("keydown", onKeyDown);
+      window.clearTimeout(timer);
+    };
+  }, [open, close]);
+
+  const solid = scrolled || open;
+
+  return (
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-500 ease-[var(--ease-out-quint)] ${
+          solid
+            ? "border-b border-ink-900/10 bg-paper-50/92 backdrop-blur-md"
+            : "border-b border-transparent bg-transparent"
+        }`}
+      >
+        <div className="mx-auto flex h-[var(--header-h)] max-w-wide items-center gap-4 px-gutter sm:px-8 lg:px-12">
+          <Link
+            href="/"
+            className="shrink-0"
+            aria-label={`${agencyConfig.name} — home`}
+          >
+            <Wordmark tone={solid ? "dark" : "light"} />
+          </Link>
+
+          <nav
+            aria-label="Section navigation"
+            className="ml-auto hidden items-center gap-1 lg:flex"
+          >
+            {nav.map((item) => {
+              const isActive = item.sectionId && active === item.sectionId;
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  aria-current={isActive ? "true" : undefined}
+                  className={`relative px-3 py-2 text-[0.8125rem] font-medium transition-colors duration-300 ${
+                    solid
+                      ? isActive
+                        ? "text-ink-900"
+                        : "text-ink-600 hover:text-ink-900"
+                      : isActive
+                        ? "text-paper-50"
+                        : "text-paper-100/70 hover:text-paper-50"
+                  }`}
+                >
+                  {item.label}
+                  <span
+                    aria-hidden="true"
+                    className={`absolute inset-x-3 -bottom-0.5 h-px origin-left transition-transform duration-400 ease-[var(--ease-out-quint)] ${
+                      solid ? "bg-brass-600" : "bg-brass-400"
+                    } ${isActive ? "scale-x-100" : "scale-x-0"}`}
+                  />
+                </a>
+              );
+            })}
+          </nav>
+
+          <div className="ml-auto flex items-center gap-2 lg:ml-4">
+            <PhoneLink
+              href={telUrl}
+              ctaLocation="header"
+              bare
+              ariaLabel={`Call ${agencyConfig.name} on ${agencyConfig.phoneDisplay}`}
+              className={`hidden h-11 w-11 items-center justify-center rounded-xs border transition-colors duration-300 sm:inline-flex ${
+                solid
+                  ? "border-ink-900/20 text-ink-800 hover:border-ink-900/50"
+                  : "border-paper-50/25 text-paper-50 hover:border-paper-50/70"
+              }`}
+            >
+              <PhoneIcon size={18} />
+            </PhoneLink>
+
+            {/* Icon-only on small screens: a labelled button collides with the
+                menu toggle at 390px. Wrapped rather than classed `hidden`,
+                because buttonClass already sets `inline-flex` and the two
+                display utilities sit in the same layer. */}
+            <span className="sm:hidden">
+              <WhatsAppLink
+                ctaLocation="header"
+                projectName={projectName}
+                projectSlug={projectSlug}
+                bare
+                hideIcon
+                ariaLabel="Chat with Islamabad Property Consultant on WhatsApp"
+                className="grid size-11 place-items-center rounded-xs bg-wa-600 text-white"
+              >
+                <WhatsAppIcon size={19} />
+              </WhatsAppLink>
+            </span>
+
+            <span className="hidden sm:contents">
+              <WhatsAppLink
+                ctaLocation="header"
+                projectName={projectName}
+                projectSlug={projectSlug}
+                size="sm"
+              >
+                WhatsApp
+              </WhatsAppLink>
+            </span>
+
+            <button
+              ref={toggleRef}
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-expanded={open}
+              aria-controls="nav-drawer"
+              className={`inline-flex h-11 w-11 items-center justify-center rounded-xs border transition-colors duration-300 lg:hidden ${
+                solid
+                  ? "border-ink-900/20 text-ink-900"
+                  : "border-paper-50/25 text-paper-50"
+              }`}
+            >
+              {open ? <CloseIcon size={20} /> : <MenuIcon size={20} />}
+              <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* --- Drawer ----------------------------------------------------- */}
+      <div
+        className={`fixed inset-0 z-40 lg:hidden ${open ? "" : "pointer-events-none"}`}
+        aria-hidden={!open}
+      >
+        <button
+          type="button"
+          tabIndex={-1}
+          aria-hidden="true"
+          onClick={close}
+          className={`absolute inset-0 bg-ink-950/55 backdrop-blur-[2px] transition-opacity duration-400 ${
+            open ? "opacity-100" : "opacity-0"
+          }`}
+        />
+        <div
+          ref={drawerRef}
+          id="nav-drawer"
+          role="dialog"
+          aria-modal={open || undefined}
+          aria-label="Menu"
+          className={`absolute inset-x-0 top-0 origin-top bg-paper-50 pt-[var(--header-h)] shadow-float transition-transform duration-500 ease-[var(--ease-out-quint)] ${
+            open ? "translate-y-0" : "-translate-y-full"
+          }`}
+        >
+          <nav
+            aria-label="Menu"
+            className="max-h-[calc(100dvh-var(--header-h))] overflow-y-auto px-gutter pb-8 pt-2 sm:px-8"
+          >
+            <ul className="divide-y divide-ink-900/8">
+              {nav.map((item, index) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    onClick={close}
+                    className="flex items-baseline gap-4 py-4 text-h4 text-ink-900"
+                  >
+                    <span className="eyebrow tabular w-6 text-brass-700">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-7 grid gap-2.5">
+              <WhatsAppLink
+                ctaLocation="nav-drawer"
+                projectName={projectName}
+                projectSlug={projectSlug}
+                size="lg"
+              >
+                Get Details on WhatsApp
+              </WhatsAppLink>
+              <PhoneLink href={telUrl} ctaLocation="nav-drawer" variant="outline" size="lg">
+                <PhoneIcon size={18} />
+                <span>Call {agencyConfig.phoneDisplay}</span>
+              </PhoneLink>
+            </div>
+
+            <p className="mt-6 text-micro text-ink-500">
+              {agencyConfig.positioning}
+            </p>
+          </nav>
+        </div>
+      </div>
+    </>
+  );
+}
