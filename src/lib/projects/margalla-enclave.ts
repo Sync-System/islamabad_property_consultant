@@ -213,12 +213,26 @@ export const margallaEnclave: Project = {
         title: "Zone 4, on Jinnah Avenue",
         body: "The site sits at the foothills of the Margalla Hills in Zone 4, Islamabad, on Jinnah Avenue — previously Kuri Road. The developer lists direct access to Srinagar Highway, Jinnah Avenue and the surrounding arterial network.",
         art: "ridge",
+        media: {
+          src: "/projects/margalla-enclave/highlights/islamabad-expressway.jpg",
+          alt: "Islamabad Expressway, part of the city's arterial road network",
+          width: 1600,
+          height: 1197,
+          credit: "Pakieditor · CC BY-SA 4.0",
+        },
       },
       {
         category: "Credibility",
         title: "A CDA and DHA Islamabad joint venture",
         body: "Margalla Enclave is developed jointly by the Capital Development Authority and DHA Islamabad. Allotment runs through a published ballot process open to CNIC and NICOP holders, with payments made to a named project account.",
         art: "plan",
+        media: {
+          src: "/projects/margalla-enclave/highlights/constitution-avenue.jpg",
+          alt: "Constitution Avenue, Islamabad's civic boulevard",
+          width: 1600,
+          height: 1065,
+          credit: "Zacharie Grossen · CC BY-SA 4.0",
+        },
       },
       {
         category: "Structure",
@@ -231,6 +245,13 @@ export const margallaEnclave: Project = {
         title: "Amenity planned in, not promised later",
         body: "The developer's amenity list covers the Lake District and sports facilities, Bazar-e-Bozorg and shopping, a botanical garden and parks, education and healthcare, an extensive road and drainage network, and 24/7 security.",
         art: "water",
+        media: {
+          src: "/projects/margalla-enclave/highlights/fatima-jinnah-park.jpg",
+          alt: "A park pavilion in Islamabad",
+          width: 1600,
+          height: 1200,
+          credit: "Ibnazhar · CC BY-SA 3.0",
+        },
       },
       {
         category: "Considerations",
@@ -531,9 +552,12 @@ export const margallaEnclave: Project = {
     },
     note: "Awaiting the developer's released master-plan sheet. The viewer below is showing an indicative site-structure diagram, not the official plan. Ask us for the current sheet and block availability on WhatsApp.",
     legend: [
-      { label: "Residential blocks", swatch: "var(--color-pine-600)" },
+      { label: "Residential blocks", swatch: "var(--color-ink-600)" },
       { label: "Commercial", swatch: "var(--color-brass-500)" },
-      { label: "Parks & green belt", swatch: "var(--color-pine-400)" },
+      // Hard-coded rather than tokenised: this swatch is describing literal
+      // foliage on the plan, not a brand colour, so it stays green even
+      // though the site's own `pine` token no longer is.
+      { label: "Parks & green belt", swatch: "#5a8a63" },
       { label: "Lake District", swatch: "#3f7fa8" },
       { label: "Arterial road network", swatch: "var(--color-ink-500)" },
     ],
@@ -666,8 +690,14 @@ export const margallaEnclave: Project = {
       note: "Sector designation is per press reporting rather than the developer's own site.",
     },
     road: "Jinnah Avenue (formerly Kuri Road)",
-    mapEmbedUrl: undefined,
-    mapLinkUrl: undefined,
+    // Google's own resolution of the road/zone, not a plot-accurate pin from
+    // the developer — we do not have verified boundary coordinates. The
+    // section below says so next to the map rather than implying precision
+    // we do not have.
+    mapEmbedUrl:
+      "https://www.google.com/maps?q=Jinnah+Avenue,+Zone+4,+Islamabad,+Pakistan&output=embed",
+    mapLinkUrl:
+      "https://www.google.com/maps/search/?api=1&query=Jinnah+Avenue%2C+Zone+4%2C+Islamabad%2C+Pakistan",
     media: {
       src: "/projects/margalla-enclave/location/islamabad-highway.jpg",
       alt: "Islamabad Highway seen from the 9th Avenue bridge",
@@ -993,4 +1023,12 @@ export const margallaEnclave: Project = {
   },
 
   officialSource: DEVELOPER_SOURCE,
+
+  closingMedia: {
+    src: "/projects/margalla-enclave/context/pakistan-monument-dusk.jpg",
+    alt: "The Pakistan Monument in Islamabad at dusk",
+    width: 1800,
+    height: 1200,
+    credit: "Muhammad Ashar · CC BY-SA 4.0",
+  },
 };

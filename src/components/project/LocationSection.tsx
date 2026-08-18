@@ -66,37 +66,59 @@ export function LocationSection({ project }: { project: Project }) {
           <div className="mt-14 grid gap-8 lg:grid-cols-12 lg:gap-10">
             {/* --- Map / diagram ------------------------------------------ */}
             <Reveal variant="mask" className="lg:col-span-7">
-              <div className="relative">
-                {location.mapEmbedUrl ? (
+              {location.mapEmbedUrl ? (
+                <>
                   <iframe
                     src={location.mapEmbedUrl}
-                    title={`Map showing ${project.name}`}
+                    title={`Map of the road and zone ${project.name} addresses`}
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                     className="aspect-[3/2] w-full border border-ink-900/12"
                   />
-                ) : (
-                  <>
-                    <ProjectMedia
-                      media={location.media}
-                      seed="location"
-                      sizes="(max-width: 1024px) 92vw, 58vw"
-                      className="w-full border border-ink-900/12"
-                    />
-                    <p className="absolute inset-x-4 bottom-4 flex items-start gap-2.5 bg-paper-50/92 p-3.5 text-micro text-ink-600 backdrop-blur-sm">
-                      <InfoIcon size={15} className="mt-px shrink-0 text-brass-700" />
-                      An interactive map will be published once we have confirmed
-                      the exact site boundary with the developer. Ask us for a
-                      pinned location on WhatsApp.
-                    </p>
-                  </>
-                )}
-              </div>
-              {!location.mapEmbedUrl && (
-                <>
+                  {/* Google's own resolution of the road/zone, not a plot-accurate
+                      pin — we do not have verified boundary coordinates, so this
+                      says exactly what it is rather than implying more precision
+                      than we have. */}
+                  <p className="mt-3 flex items-start gap-2.5 text-micro text-ink-500">
+                    <InfoIcon size={15} className="mt-px shrink-0 text-brass-700" />
+                    <span>
+                      Google Maps&rsquo; own location for {location.road ?? "the road"}{" "}
+                      in {location.zone ?? "the zone"} — the general area the
+                      project addresses, not a confirmed plot boundary.
+                      {location.mapLinkUrl && (
+                        <>
+                          {" "}
+                          <a
+                            href={location.mapLinkUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-medium text-ink-700 underline decoration-brass-500/60 underline-offset-4 hover:text-ink-900"
+                          >
+                            Open in Google Maps
+                          </a>
+                          .
+                        </>
+                      )}
+                    </span>
+                  </p>
+                </>
+              ) : (
+                <div className="relative">
+                  <ProjectMedia
+                    media={location.media}
+                    seed="location"
+                    sizes="(max-width: 1024px) 92vw, 58vw"
+                    className="w-full border border-ink-900/12"
+                  />
+                  <p className="absolute inset-x-4 bottom-4 flex items-start gap-2.5 bg-paper-50/92 p-3.5 text-micro text-ink-600 backdrop-blur-sm">
+                    <InfoIcon size={15} className="mt-px shrink-0 text-brass-700" />
+                    An interactive map will be published once we have confirmed
+                    the exact site boundary with the developer. Ask us for a
+                    pinned location on WhatsApp.
+                  </p>
                   <MediaCredit media={location.media} className="mt-2" />
-                  </>
-                )}
+                </div>
+              )}
             </Reveal>
 
             {/* --- Verified distances ------------------------------------- */}

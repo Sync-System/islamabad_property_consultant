@@ -1,6 +1,8 @@
 import type { Project } from "@/lib/projects/types";
 import { Container, Section, SectionHeader } from "@/components/ui/Section";
 import { ProjectArt } from "@/components/media/ProjectArt";
+import { ProjectMedia } from "@/components/media/ProjectMedia";
+import { MediaCredit } from "@/components/media/MediaCredit";
 import { Reveal } from "@/components/ui/Reveal";
 import { WhatsAppLink } from "@/components/conversion/WhatsAppLink";
 
@@ -43,18 +45,30 @@ export function InvestmentHighlights({ project }: { project: Project }) {
                   isLast ? "sm:col-span-2 lg:col-span-1" : ""
                 }`}
               >
-                {/* Artwork sits behind at low opacity and lifts on hover. */}
-                {item.art && (
+                {/* A real photo where one actually illustrates the point; the
+                    generated composition elsewhere, so an abstract item never
+                    borrows a photo it has no claim to. Both sit behind at low
+                    opacity and lift on hover. */}
+                {(item.media?.src || item.art) && (
                   <div
                     aria-hidden="true"
-                    className="absolute inset-0 -z-10 opacity-[0.22] transition-opacity duration-700 ease-[var(--ease-out-quint)] group-hover:opacity-40"
+                    className="absolute inset-0 -z-10 opacity-[0.28] transition-opacity duration-700 ease-[var(--ease-out-quint)] group-hover:opacity-45"
                   >
-                    <ProjectArt
-                      variant={item.art}
-                      seed={`hl-${index}`}
-                      tone="dark"
-                      className="h-full w-full"
-                    />
+                    {item.media?.src ? (
+                      <ProjectMedia
+                        media={item.media}
+                        seed={`hl-${index}`}
+                        sizes="(max-width: 640px) 100vw, 34vw"
+                        className="h-full w-full"
+                      />
+                    ) : (
+                      <ProjectArt
+                        variant={item.art!}
+                        seed={`hl-${index}`}
+                        tone="dark"
+                        className="h-full w-full"
+                      />
+                    )}
                   </div>
                 )}
                 <div
@@ -71,6 +85,9 @@ export function InvestmentHighlights({ project }: { project: Project }) {
 
                 <h3 className="mt-6 text-h4 text-paper-50">{item.title}</h3>
                 <p className="mt-4 text-body-sm text-paper-100/70">{item.body}</p>
+                {item.media?.credit && (
+                  <MediaCredit media={item.media} tone="dark" className="mt-3" />
+                )}
 
                 <span
                   aria-hidden="true"

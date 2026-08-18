@@ -44,7 +44,7 @@ export default async function Image({
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "linear-gradient(160deg, #10261f 0%, #080b0a 62%)",
+          background: "linear-gradient(160deg, #101c3a 0%, #02071d 62%)",
           padding: "68px 76px",
           position: "relative",
         }}
@@ -58,22 +58,22 @@ export default async function Image({
         >
           <path
             d="M0 224 L108 170 L214 218 L322 124 L446 192 L548 150 L664 208 L790 134 L886 196 L1006 154 L1108 208 L1200 174 L1200 360 L0 360 Z"
-            fill="#13241b"
+            fill="#1f2d4b"
           />
           <path
             d="M0 300 L132 238 L242 296 L378 200 L494 272 L614 222 L730 284 L858 212 L968 278 L1088 228 L1178 286 L1200 274 L1200 360 L0 360 Z"
-            fill="#080f0b"
+            fill="#050b1f"
           />
         </svg>
 
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-          <div style={{ width: 56, height: 1, background: "#b4955a" }} />
+          <div style={{ width: 56, height: 1, background: "#e97430" }} />
           <div
             style={{
               fontSize: 21,
               letterSpacing: 5,
               textTransform: "uppercase",
-              color: "#ddc9a1",
+              color: "#f9c191",
               fontWeight: 600,
             }}
           >
@@ -81,7 +81,7 @@ export default async function Image({
           </div>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", zIndex: 1 }}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
           <div
             style={{
               fontSize: title.length > 22 ? 88 : 116,
@@ -110,13 +110,12 @@ export default async function Image({
             justifyContent: "space-between",
             borderTop: "1px solid rgba(250,248,244,0.18)",
             paddingTop: 26,
-            zIndex: 1,
           }}
         >
           <div style={{ fontSize: 23, color: "rgba(244,241,234,0.68)" }}>
             {association}
           </div>
-          <div style={{ fontSize: 23, color: "#ddc9a1", fontWeight: 600 }}>
+          <div style={{ fontSize: 23, color: "#f9c191", fontWeight: 600 }}>
             {agencyConfig.whatsappDisplay}
           </div>
         </div>

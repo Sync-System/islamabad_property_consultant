@@ -127,7 +127,15 @@ export interface Highlight {
   category: string;
   title: string;
   body: string;
+  /** Generated composition, drawn behind the card when `media` is absent. */
   art?: ArtVariant;
+  /**
+   * A real contextual photograph, when one exists that actually illustrates
+   * the point (a road for "Location", a park for "Lifestyle"). Left unset for
+   * abstract items — payment structure, buyer diligence — where a photo would
+   * suggest a specificity the item does not have.
+   */
+  media?: Media;
 }
 
 export interface PropertyOption {
@@ -364,6 +372,13 @@ export interface Project {
   seo: ProjectSeo;
   /** Where the developer's own information can be checked. */
   officialSource: Source;
+  /**
+   * Backdrop for the closing CTA. Optional and generic by design — a striking
+   * city photo works here in a way it would not in `location` or `gallery`,
+   * since this section makes no locational claim for it to get wrong. Falls
+   * back to generated ridge artwork when unset.
+   */
+  closingMedia?: Media;
 }
 
 /** Summary shape used by the projects directory — cheap to render. */

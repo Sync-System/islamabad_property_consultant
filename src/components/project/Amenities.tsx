@@ -2,7 +2,8 @@ import type { Project } from "@/lib/projects/types";
 import { Container, Section, SectionHeader } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { AmenityGlyph } from "@/components/ui/Icon";
-import { ProjectArt } from "@/components/media/ProjectArt";
+import { ProjectMedia } from "@/components/media/ProjectMedia";
+import { MediaCredit } from "@/components/media/MediaCredit";
 
 /**
  * Community planning.
@@ -13,17 +14,32 @@ import { ProjectArt } from "@/components/media/ProjectArt";
  * commitment, not our embellishment of it.
  */
 
+const AMENITIES_BACKDROP = {
+  src: "/projects/margalla-enclave/gallery/margalla-forest.jpg",
+  alt: "Forest and hillside in Margalla Hills National Park",
+  width: 1800,
+  height: 1350,
+  credit: "Hashim bajwa · CC BY-SA 4.0",
+};
+
 export function Amenities({ project }: { project: Project }) {
   const { amenities } = project;
 
   return (
     <Section id="amenities" tone="pine" aria-labelledby="amenities-title">
-      {/* A single large drawing anchors the section without competing with text. */}
+      {/* A real forest photo anchors the section without competing with text —
+          Margalla Hills National Park, the same range the amenity list's
+          "botanical garden and parks" line describes generally. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 right-0 hidden w-1/2 opacity-[0.16] lg:block"
+        className="pointer-events-none absolute inset-y-0 right-0 hidden w-1/2 opacity-[0.32] lg:block"
       >
-        <ProjectArt variant="canopy" seed="amenities" tone="dark" className="h-full w-full" />
+        <ProjectMedia
+          media={AMENITIES_BACKDROP}
+          seed="amenities"
+          sizes="50vw"
+          className="h-full w-full"
+        />
       </div>
       <div
         aria-hidden="true"
@@ -78,6 +94,7 @@ export function Amenities({ project }: { project: Project }) {
             </p>
           </Reveal>
         )}
+        <MediaCredit media={AMENITIES_BACKDROP} tone="dark" className="mt-3" />
       </Container>
     </Section>
   );

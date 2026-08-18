@@ -167,6 +167,7 @@ export default async function ProjectPage(props: PageProps<"/projects/[slug]">) 
           projectName={project.name}
           projectSlug={project.slug}
           projectShortName={project.shortName}
+          media={project.closingMedia}
         />
       </main>
 

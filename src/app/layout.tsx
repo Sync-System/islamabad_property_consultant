@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Instrument_Serif, Manrope } from "next/font/google";
 import { siteConfig } from "@/lib/config/site";
 import { jsonLd, organizationSchema, websiteSchema } from "@/lib/structured-data";
+import { SmoothAnchors } from "@/components/ui/SmoothAnchors";
 import "./globals.css";
 
 /**
@@ -64,8 +65,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#faf8f4" },
-    { media: "(prefers-color-scheme: dark)", color: "#080b0a" },
+    { media: "(prefers-color-scheme: light)", color: "#f7f7fd" },
+    { media: "(prefers-color-scheme: dark)", color: "#02071d" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -98,6 +99,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <SmoothAnchors />
         {children}
       </body>
     </html>

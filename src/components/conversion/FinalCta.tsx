@@ -4,6 +4,9 @@ import { Container, Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { WhatsAppLink, PhoneLink } from "@/components/conversion/WhatsAppLink";
 import { ProjectArt } from "@/components/media/ProjectArt";
+import { ProjectMedia } from "@/components/media/ProjectMedia";
+import { MediaCredit } from "@/components/media/MediaCredit";
+import type { Media } from "@/lib/projects/types";
 import { buttonClass } from "@/components/ui/button-styles";
 import { CalendarIcon, PhoneIcon } from "@/components/ui/Icon";
 
@@ -20,23 +23,30 @@ interface FinalCtaProps {
   projectName?: string;
   projectSlug?: string;
   projectShortName?: string;
+  /** A real closing photo, when the project has one rights-cleared for it. */
+  media?: Media;
 }
 
 export function FinalCta({
   projectName,
   projectSlug,
   projectShortName,
+  media,
 }: FinalCtaProps) {
   const subject = projectShortName ?? "premium property in Islamabad";
 
   return (
     <Section tone="pine" aria-labelledby="final-cta-title" className="overflow-hidden">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-25">
-        <ProjectArt variant="ridge" seed="final" tone="dark" className="h-full w-full" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-40">
+        {media?.src ? (
+          <ProjectMedia media={media} seed="final" sizes="100vw" className="h-full w-full" />
+        ) : (
+          <ProjectArt variant="ridge" seed="final" tone="dark" className="h-full w-full" />
+        )}
       </div>
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-pine-950/85 via-pine-950/70 to-pine-950"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-pine-950/90 via-pine-950/75 to-pine-950"
       />
       <div aria-hidden="true" className="grain pointer-events-none absolute inset-0" />
 
@@ -93,6 +103,9 @@ export function FinalCta({
             <p className="mx-auto mt-10 max-w-[58ch] text-micro leading-relaxed text-paper-100/45">
               {agencyConfig.independenceNotice}
             </p>
+            {media?.credit && (
+              <MediaCredit media={media} tone="dark" className="mt-2" />
+            )}
           </Reveal>
         </div>
       </Container>

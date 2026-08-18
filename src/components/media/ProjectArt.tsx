@@ -40,32 +40,36 @@ interface Palette {
   haze: string;
 }
 
+// Deep navy and orange, matching the site's own `ink`/`brass` tokens (in turn
+// taken from slotta.dev's palette) rather than a literal landscape colour.
+// `water` keeps a small blue-grey allowance — the Lake District is an actual
+// amenity — but nothing else carries a green or gold cast any more.
 const PALETTES: Record<"dark" | "light", Palette> = {
   dark: {
-    sky0: "#08161d",
-    sky1: "#16332f",
-    sky2: "#39584a",
-    mid: "#1b3a2e",
-    near: "#0a1712",
-    line: "#9dd0b6",
-    accent: "#d8bd8a",
-    water: "#356d88",
-    field: "#132c24",
-    ridge: ["#4a6a58", "#35513f", "#22392c", "#13241b", "#080f0b"],
-    haze: "#5d7a63",
+    sky0: "#02071d",
+    sky1: "#0b1633",
+    sky2: "#1f2d4b",
+    mid: "#101c3a",
+    near: "#050b1f",
+    line: "#f0995b",
+    accent: "#e97430",
+    water: "#3d5a76",
+    field: "#081027",
+    ridge: ["#344260", "#243252", "#182440", "#0e1830", "#050b1f"],
+    haze: "#505d7a",
   },
   light: {
-    sky0: "#eef2f0",
-    sky1: "#e6e2d6",
-    sky2: "#d8cfbe",
-    mid: "#b9b0a0",
-    near: "#8d9a90",
-    line: "#1d4636",
-    accent: "#9a7c42",
-    water: "#7ba2b8",
-    field: "#ded7c8",
-    ridge: ["#c6cec4", "#adb8ab", "#93a294", "#78897c", "#5c6c62"],
-    haze: "#e9ece6",
+    sky0: "#f3f4fa",
+    sky1: "#e3e6f0",
+    sky2: "#c7cce0",
+    mid: "#b3b6c9",
+    near: "#8891a8",
+    line: "#ae4200",
+    accent: "#cc5903",
+    water: "#7391a0",
+    field: "#dee1ec",
+    ridge: ["#c3c8dc", "#a7adc6", "#8b92ad", "#707893", "#525a75"],
+    haze: "#e9ebf3",
   },
 };
 
