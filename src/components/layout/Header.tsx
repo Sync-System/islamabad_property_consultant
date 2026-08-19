@@ -134,7 +134,7 @@ export function Header({ nav, projectName, projectSlug, overHero = false }: Head
         <div className="mx-auto flex h-[var(--header-h)] max-w-wide items-center gap-4 px-gutter sm:px-8 lg:px-12">
           <Link
             href="/"
-            className="shrink-0"
+            className="flex min-h-11 shrink-0 items-center"
             aria-label={`${agencyConfig.name} — home`}
           >
             <Wordmark />
@@ -151,31 +151,41 @@ export function Header({ nav, projectName, projectSlug, overHero = false }: Head
                   key={item.href}
                   href={item.href}
                   aria-current={isActive ? "true" : undefined}
-                  className={`relative whitespace-nowrap px-2.5 py-2 text-[0.8125rem] font-medium transition-colors duration-300 ${
+                  // `min-h-11` gives a 44px target; the underline is nested
+                  // inside the label span so it stays tight to the text instead
+                  // of floating at the bottom of the enlarged hit area.
+                  className={`inline-flex min-h-11 items-center whitespace-nowrap px-2.5 text-[0.8125rem] font-medium transition-colors duration-300 ${
                     isActive ? "text-content" : "text-content-muted hover:text-content"
                   }`}
                 >
-                  {item.label}
-                  <span
-                    aria-hidden="true"
-                    className={`absolute inset-x-2.5 -bottom-0.5 h-px origin-left transition-transform duration-400 ease-[var(--ease-out-quint)] ${
-                      "bg-accent"
-                    } ${isActive ? "scale-x-100" : "scale-x-0"}`}
-                  />
+                  <span className="relative">
+                    {item.label}
+                    <span
+                      aria-hidden="true"
+                      className={`absolute -bottom-1.5 left-0 h-px w-full origin-left bg-accent transition-transform duration-400 ease-[var(--ease-out-quint)] ${
+                        isActive ? "scale-x-100" : "scale-x-0"
+                      }`}
+                    />
+                  </span>
                 </a>
               );
             })}
           </nav>
 
           <div className="ml-auto flex items-center gap-2 lg:ml-4">
-            <ThemeToggle />
+            {/* Wrapped rather than classed `hidden`: the button's own `grid`
+                and `hidden` are both display utilities in the same layer, so
+                the class attribute order would not decide the winner. */}
+            <span className="hidden sm:contents">
+              <ThemeToggle />
+            </span>
 
             <PhoneLink
               href={telUrl}
               ctaLocation="header"
               bare
               ariaLabel={`Call ${agencyConfig.name} on ${agencyConfig.phoneDisplay}`}
-              className="hidden h-11 w-11 items-center justify-center rounded-xs border border-line text-content transition-colors duration-300 hover:border-line-strong sm:inline-flex"
+              className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-xs border border-line text-content transition-colors duration-300 hover:border-line-strong sm:inline-flex"
             >
               <PhoneIcon size={18} />
             </PhoneLink>
@@ -184,7 +194,7 @@ export function Header({ nav, projectName, projectSlug, overHero = false }: Head
                 menu toggle at 390px. Wrapped rather than classed `hidden`,
                 because buttonClass already sets `inline-flex` and the two
                 display utilities sit in the same layer. */}
-            <span className="sm:hidden">
+            <span className="shrink-0 sm:hidden">
               <WhatsAppLink
                 ctaLocation="header"
                 projectName={projectName}
@@ -215,7 +225,7 @@ export function Header({ nav, projectName, projectSlug, overHero = false }: Head
               onClick={() => setOpen((v) => !v)}
               aria-expanded={open}
               aria-controls="nav-drawer"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-xs border border-line text-content transition-colors duration-300 lg:hidden"
+              className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xs border border-line text-content transition-colors duration-300 lg:hidden"
             >
               {open ? <CloseIcon size={20} /> : <MenuIcon size={20} />}
               <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
@@ -252,7 +262,7 @@ export function Header({ nav, projectName, projectSlug, overHero = false }: Head
             aria-label="Menu"
             className="max-h-[calc(100dvh-var(--header-h))] overflow-y-auto px-gutter pb-8 pt-2 sm:px-8"
           >
-            <ul className="divide-y divide-ink-900/8">
+            <ul className="divide-y divide-line">
               {nav.map((item, index) => (
                 <li key={item.href}>
                   <a
@@ -282,6 +292,13 @@ export function Header({ nav, projectName, projectSlug, overHero = false }: Head
                 <PhoneIcon size={18} />
                 <span>Call {agencyConfig.phoneDisplay}</span>
               </PhoneLink>
+            </div>
+
+            {/* The header has no room for this at 390px, so it lives here on
+                small screens and in the header from `sm` up. */}
+            <div className="mt-6 flex items-center justify-between border-t border-line pt-5 sm:hidden">
+              <span className="text-body-sm text-content-muted">Appearance</span>
+              <ThemeToggle />
             </div>
 
             <p className="mt-6 text-micro text-content-subtle">

@@ -48,32 +48,24 @@ export function ProjectHero({ project }: { project: Project }) {
             type sits — so the photograph stays visible instead of being
             flattened by one blanket overlay.
 
-            They are built from `--scrim-*`, which follows the theme: the light
-            theme veils the photograph in white so the hero reads as part of an
-            all-white page, while the dark theme deepens it. Either way the
-            copy keeps its contrast against whatever is behind it. */}
+            They come from `--hero-veil-*`, which is defined per theme so each
+            can concentrate the veil where its copy actually sits. That is what
+            lets the light theme keep the Margallas clearly visible in the
+            upper-right while the lower-left stays near-white under the type. */}
         <div
           aria-hidden="true"
           className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "linear-gradient(to top, var(--scrim-0), var(--scrim-1) 45%, var(--scrim-2))",
-          }}
+          style={{ backgroundImage: "var(--hero-veil-bottom)" }}
         />
         <div
           aria-hidden="true"
           className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, var(--scrim-1), var(--scrim-2) 45%, transparent)",
-          }}
+          style={{ backgroundImage: "var(--hero-veil-side)" }}
         />
         <div
           aria-hidden="true"
           className="absolute inset-x-0 top-0 h-44"
-          style={{
-            backgroundImage: "linear-gradient(to bottom, var(--scrim-1), transparent)",
-          }}
+          style={{ backgroundImage: "var(--hero-veil-top)" }}
         />
         <div aria-hidden="true" className="grain absolute inset-0" />
       </div>
@@ -164,7 +156,7 @@ export function ProjectHero({ project }: { project: Project }) {
             style={{ "--enter-delay": "410ms" } as React.CSSProperties}
           >
             <div className="border-l border-line pl-5 lg:pl-7">
-              <p className="eyebrow text-content-subtle">Presented by</p>
+              <p className="eyebrow text-content-muted">Presented by</p>
               <p className="mt-3 font-display text-h4 text-content">
                 {agencyConfig.name}
               </p>
@@ -180,7 +172,7 @@ export function ProjectHero({ project }: { project: Project }) {
         <div className="mt-12 flex items-center justify-between border-t border-line pt-6 lg:mt-16">
           <a
             href="#overview"
-            className="group flex min-h-11 items-center gap-3 pr-2 text-[0.75rem] tracking-[0.16em] text-content-subtle uppercase transition-colors hover:text-content"
+            className="group flex min-h-11 items-center gap-3 pr-2 text-[0.75rem] tracking-[0.16em] text-content-muted uppercase transition-colors hover:text-content"
           >
             <span
               aria-hidden="true"
@@ -199,7 +191,7 @@ export function ProjectHero({ project }: { project: Project }) {
           </a>
 
           <div className="hidden max-w-[42ch] text-right sm:block">
-            <p className="text-micro text-content-subtle">
+            <p className="text-micro text-content-muted">
               Project information is compiled from the developer&rsquo;s
               published material. Verify current details before any financial
               decision.

@@ -172,9 +172,32 @@
   --accent: #ae4200;
   --accent-strong: #cc5903;
 
-  /* Scrims for copy set over photography. The hero keeps its photograph in
-     both themes, so these lighten in the light theme instead of forcing a dark
-     band onto an otherwise white page. */
+  /* Hero veils. The photograph stays in both themes, so these are built per
+     theme rather than as one shared opacity ramp: the light theme needs the
+     veil concentrated over the copy (lower-left) so the upper-right can show
+     the Margallas at close to full strength, which a uniform white wash
+     destroyed. Everywhere copy sits the combined veil is >= 0.9 white, which
+     clears AA against `--content` over any photograph.
+     `--scrim-*` remain for the closing CTA, which is a simpler case. */
+  --hero-veil-bottom: linear-gradient(
+    to top,
+    rgb(255 255 255 / 0.99),
+    rgb(255 255 255 / 0.96) 18%,
+    rgb(255 255 255 / 0.76) 42%,
+    rgb(255 255 255 / 0.2) 76%,
+    rgb(255 255 255 / 0.06)
+  );
+  --hero-veil-side: linear-gradient(
+    to right,
+    rgb(255 255 255 / 0.9),
+    rgb(255 255 255 / 0.58) 48%,
+    rgb(255 255 255 / 0.14) 78%,
+    transparent
+  );
+  --hero-veil-top: linear-gradient(to bottom, rgb(255 255 255 / 0.86), transparent);
+
+  --grain-opacity: 0.1;
+
   --scrim-0: rgb(255 255 255 / 0.97);
   --scrim-1: rgb(255 255 255 / 0.82);
   --scrim-2: rgb(255 255 255 / 0.55);
@@ -238,6 +261,25 @@
   /* Scrims for copy set over photography. The hero keeps its photograph in
      both themes, so these lighten in the light theme instead of forcing a dark
      band onto an otherwise white page. */
+  --hero-veil-bottom: linear-gradient(
+    to top,
+    rgb(2 7 29 / 0.98),
+    rgb(2 7 29 / 0.94) 18%,
+    rgb(2 7 29 / 0.7) 42%,
+    rgb(2 7 29 / 0.3) 76%,
+    rgb(2 7 29 / 0.12)
+  );
+  --hero-veil-side: linear-gradient(
+    to right,
+    rgb(2 7 29 / 0.88),
+    rgb(2 7 29 / 0.55) 48%,
+    rgb(2 7 29 / 0.14) 78%,
+    transparent
+  );
+  --hero-veil-top: linear-gradient(to bottom, rgb(2 7 29 / 0.88), transparent);
+
+  --grain-opacity: 0.35;
+
   --scrim-0: rgb(2 7 29 / 0.97);
   --scrim-1: rgb(2 7 29 / 0.72);
   --scrim-2: rgb(2 7 29 / 0.42);
@@ -275,6 +317,26 @@
     /* Scrims for copy set over photography. The hero keeps its photograph in
        both themes, so these lighten in the light theme instead of forcing a dark
        band onto an otherwise white page. */
+    --hero-veil-bottom: linear-gradient(
+      to top,
+      rgb(2 7 29 / 0.96),
+      rgb(2 7 29 / 0.7) 42%,
+      rgb(2 7 29 / 0.3) 76%,
+      rgb(2 7 29 / 0.12)
+    );
+    --hero-veil-side: linear-gradient(
+      to right,
+      rgb(2 7 29 / 0.88),
+      rgb(2 7 29 / 0.55) 48%,
+      rgb(2 7 29 / 0.14) 78%,
+      transparent
+    );
+    --hero-veil-top: linear-gradient(to bottom, rgb(2 7 29 / 0.88), transparent);
+
+    --grain-opacity: 0.35;
+
+  --grain-opacity: 0.35;
+  
     --scrim-0: rgb(2 7 29 / 0.97);
     --scrim-1: rgb(2 7 29 / 0.72);
     --scrim-2: rgb(2 7 29 / 0.42);
@@ -380,13 +442,41 @@
     font-weight: 600;
   }
 
+  /* Theme-toggle icon visibility.
+     Driven by the same selectors that set the palette, so the button shows the
+     correct icon on the very first paint. Doing this in CSS rather than in
+     React is what lets the button be server-rendered: it needs no knowledge of
+     `localStorage`, so there is no placeholder and nothing pops into the header
+     after hydration. */
+  .theme-icon-sun {
+    display: none;
+  }
+
+  :root[data-theme="dark"] .theme-icon-sun {
+    display: block;
+  }
+
+  :root[data-theme="dark"] .theme-icon-moon {
+    display: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .theme-icon-sun {
+      display: block;
+    }
+
+    :root:not([data-theme="light"]) .theme-icon-moon {
+      display: none;
+    }
+  }
+
   /* Faint film grain. Inline SVG turbulence — no network request, no layout cost. */
   .grain::after {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.35;
+    opacity: var(--grain-opacity, 0.35);
     mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
   }

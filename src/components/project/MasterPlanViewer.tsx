@@ -261,7 +261,7 @@ function PlanCanvas({
           >
             <MinusIcon size={18} />
           </PlanButton>
-          <span className="tabular min-w-11 bg-ink-950/75 px-2 py-2 text-center text-[0.75rem] font-medium text-paper-100/80 backdrop-blur-sm">
+          <span className="tabular min-w-11 bg-ink-950 px-2 py-2 text-center text-[0.75rem] font-medium text-paper-50 backdrop-blur-sm">
             {scale.toFixed(1)}×
           </span>
           <PlanButton
@@ -304,7 +304,7 @@ function PlanButton({
       onClick={onClick}
       disabled={disabled}
       aria-label={label}
-      className="grid size-10 place-items-center bg-ink-950/75 text-paper-100/80 backdrop-blur-sm transition-colors hover:bg-ink-950 hover:text-paper-50 disabled:opacity-35"
+      className="grid size-11 place-items-center bg-ink-950 text-paper-50 backdrop-blur-sm transition-colors hover:bg-ink-850 disabled:opacity-35"
     >
       {children}
     </button>

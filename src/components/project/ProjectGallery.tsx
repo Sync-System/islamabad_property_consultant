@@ -96,7 +96,7 @@ export function ProjectGallery({ project }: { project: Project }) {
                 />
                 <span
                   aria-hidden="true"
-                  className="absolute right-3 top-3 grid size-9 place-items-center bg-paper-50/0 text-paper-50 opacity-0 transition-all duration-400 group-hover:bg-ink-950/60 group-hover:opacity-100 group-focus-visible:opacity-100"
+                  className="absolute right-3 top-3 grid size-9 place-items-center bg-paper-50/0 text-paper-50 opacity-0 transition-all duration-400 group-hover:bg-ink-950/75 group-hover:opacity-100 group-focus-visible:opacity-100"
                 >
                   <ExpandIcon size={17} />
                 </span>

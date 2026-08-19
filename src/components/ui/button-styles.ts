@@ -21,7 +21,7 @@ const BASE =
   "active:translate-y-px disabled:pointer-events-none disabled:opacity-55 rounded-xs text-center";
 
 const SIZES: Record<ButtonSize, string> = {
-  sm: "min-h-10 px-4 text-[0.8125rem]",
+  sm: "min-h-11 px-4 text-[0.8125rem]",
   md: "min-h-12 px-6 text-[0.875rem]",
   lg: "min-h-[3.5rem] px-7 text-[0.9375rem] sm:px-9",
 };

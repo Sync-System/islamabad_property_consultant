@@ -26,7 +26,7 @@ export function MediaCredit({
   return (
     <span
       className={`block text-[0.6875rem] leading-relaxed ${
-        tone === "dark" ? "text-paper-100/45" : "text-content-subtle"
+        tone === "dark" ? "text-paper-100/60" : "text-content-muted"
       } ${className}`}
     >
       Photo: {media.credit}

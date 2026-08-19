@@ -38,7 +38,7 @@ export function ProjectCard({
             aria-hidden="true"
             className="absolute inset-0 bg-gradient-to-t from-ink-950/65 to-transparent"
           />
-          <p className="absolute left-5 top-5 border border-paper-50/35 bg-ink-950/45 px-2.5 py-1 text-[0.625rem] font-semibold tracking-[0.12em] text-paper-50 uppercase backdrop-blur-sm">
+          <p className="absolute left-5 top-5 bg-ink-950 px-2.5 py-1 text-[0.625rem] font-semibold tracking-[0.12em] text-paper-50 uppercase backdrop-blur-sm">
             {isVerified(project.status) ? project.status.value : "Status to confirm"}
           </p>
         </div>
