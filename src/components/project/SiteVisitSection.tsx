@@ -29,7 +29,8 @@ export function SiteVisitSection({ project }: { project: Project }) {
       </div>
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-ink-950 via-ink-950/92 to-ink-950/70"
+        className="pointer-events-none absolute inset-0"
+        style={{ backgroundImage: "var(--veil-section-right)" }}
       />
 
       <Container className="relative">

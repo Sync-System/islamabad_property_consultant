@@ -18,7 +18,10 @@ export default function NotFound() {
       >
         <div aria-hidden="true" className="absolute inset-0 -z-10">
           <ProjectArt variant="contour" seed="404" className="h-full w-full" />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/80 to-ink-950/70" />
+          <div
+            className="absolute inset-0"
+            style={{ backgroundImage: "var(--hero-veil-bottom)" }}
+          />
           <div className="grain absolute inset-0" />
         </div>
 

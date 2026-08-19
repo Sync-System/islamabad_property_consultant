@@ -54,7 +54,12 @@ export function Destinations({ project }: { project: Project }) {
                   aria-hidden="true"
                   className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-ink-950/75 to-transparent"
                 />
-                <p className="absolute left-5 top-5 eyebrow text-accent">
+                {/* A solid chip, and a fixed light orange rather than the
+                    themed accent. Over photography a translucent scrim is only
+                    as dark as the image behind it — on bright sky this measured
+                    ~2:1 — so the chip carries its own background and the
+                    contrast is verifiable without knowing the photo. */}
+                <p className="absolute left-5 top-5 eyebrow bg-ink-950 px-2.5 py-1 text-brass-300">
                   {destination.eyebrow}
                 </p>
               </div>

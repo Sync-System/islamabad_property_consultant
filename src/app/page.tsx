@@ -16,6 +16,8 @@ import { ProjectCard } from "@/components/project/ProjectCard";
 import { Container, Section, SectionHeader } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { ProjectArt } from "@/components/media/ProjectArt";
+import { ProjectMedia } from "@/components/media/ProjectMedia";
+import { MediaCredit } from "@/components/media/MediaCredit";
 import { WhatsAppLink } from "@/components/conversion/WhatsAppLink";
 import { buttonClass } from "@/components/ui/button-styles";
 import { ArrowIcon } from "@/components/ui/Icon";
@@ -64,9 +66,32 @@ export default function HomePage() {
           className="relative isolate flex min-h-[88svh] flex-col justify-end overflow-hidden bg-surface-feature text-content"
           aria-labelledby="home-title"
         >
+          {/* The featured project's own photograph rather than generated
+              artwork: this is the first thing a visitor sees, and the pale
+              light-theme SVG gave the front page far less presence than the
+              project page it links to. Veils are the themed hero set, so the
+              copy stays readable on both themes. */}
           <div aria-hidden="true" className="absolute inset-0 -z-10">
-            <ProjectArt variant="ridge" seed="home" className="h-full w-full" />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/65 to-ink-950/75" />
+            <ProjectMedia
+              media={featured.hero.media}
+              priority
+              sizes="(max-width: 768px) 180vw, 100vw"
+              ratio={undefined}
+              seed="home-hero"
+              className="h-full w-full"
+            />
+            <div
+              className="absolute inset-0"
+              style={{ backgroundImage: "var(--hero-veil-bottom)" }}
+            />
+            <div
+              className="absolute inset-0"
+              style={{ backgroundImage: "var(--hero-veil-side)" }}
+            />
+            <div
+              className="absolute inset-x-0 top-0 h-44"
+              style={{ backgroundImage: "var(--hero-veil-top)" }}
+            />
             <div className="grain absolute inset-0" />
           </div>
 
@@ -121,6 +146,7 @@ export default function HomePage() {
                   Speak to a consultant
                 </WhatsAppLink>
               </div>
+              <MediaCredit media={featured.hero.media} className="mt-8" />
             </div>
           </Container>
         </section>

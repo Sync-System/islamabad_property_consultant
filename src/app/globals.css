@@ -203,6 +203,19 @@
   --scrim-2: rgb(255 255 255 / 0.55);
 }
 
+/* Section-wide veil for artwork sitting behind copy. Uses the themed surface
+   token, so one definition serves both themes — unlike a literal dark gradient,
+   which silently becomes dark-on-dark once the section itself follows the
+   theme. */
+:root {
+  --veil-section-right: linear-gradient(
+    to right,
+    var(--surface-feature),
+    color-mix(in srgb, var(--surface-feature) 92%, transparent) 45%,
+    color-mix(in srgb, var(--surface-feature) 68%, transparent)
+  );
+}
+
 /* --- Generated artwork palette -------------------------------------------
    `ProjectArt` draws with these rather than a JS palette object, so the SVG
    compositions re-tint with the theme on the same frame as everything else —
